@@ -13,3 +13,4 @@ nltk
 scikit-learn
 tensorflow
 tensorflow-datasets
+pycaret
