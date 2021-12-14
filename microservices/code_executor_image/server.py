@@ -4,6 +4,9 @@ from code_execution import Parameters, Function, Execution
 from utils import Data, Database, UserRequest, Metadata, ObjectStorage
 from typing import Union
 from constants import Constants
+import logging
+
+logging.basicConfig(filename='function_log.log', encoding='utf-8', level=logging.DEBUG)
 
 app = Flask(__name__)
 
@@ -33,7 +36,7 @@ def create_execution() -> jsonify:
         request_validator,
         filename
     )
-
+    logging.debug('CRIANDO EXECUCAO--------------------------------------------')
     if request_errors is not None:
         return request_errors
 
@@ -45,7 +48,7 @@ def create_execution() -> jsonify:
         metadata_creator,
         parameters_handler,
         function_treat)
-
+    logging.debug('CRIOU OBJETO EXECUCAO') 
     execution.create(function, function_parameters, description)
 
     return (
@@ -147,6 +150,7 @@ def analyse_patch_request_errors(request_validator: UserRequest,
 
 
 if __name__ == "__main__":
+    
     app.run(
         host=os.environ["MICROSERVICE_IP"],
         port=int(os.environ["MICROSERVICE_PORT"])
