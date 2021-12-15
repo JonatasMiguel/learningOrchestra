@@ -37,6 +37,8 @@ def create_execution() -> jsonify:
         f.write('CRIANDO EXECUCAO--------------------------------------------\n')
     
     if request_errors is not None:
+        with open('resultados.txt','a') as f:
+            f.write(f'ERRO NA REQUEST {request_errors}\n')
         return request_errors
 
     execution = Execution(
