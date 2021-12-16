@@ -1680,6 +1680,22 @@
       ]
     },
     {
+      "endpoint": "/api/learningOrchestra/v1/builder/pycaret",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "method": "POST",
+          "url_pattern": "/codeExecutor?type=function/python",
+          "host": [
+            "http://codexecutor:5009"
+          ],
+          "extra_config": {}
+        }
+      ]
+    },
+    {
       "endpoint": "/api/learningOrchestra/v1/function/python/{filename}",
       "method": "PATCH",
       "output_encoding": "no-op",
