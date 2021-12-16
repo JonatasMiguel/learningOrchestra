@@ -5,6 +5,7 @@ from utils import Data, Database, UserRequest, Metadata, ObjectStorage
 from typing import Union
 from constants import Constants
 from pycaret_utils import PlotterClassification
+import json
 
 app = Flask(__name__)
 
@@ -26,6 +27,7 @@ function_treat = Function()
 def get_file():
     with open('resultados.txt', 'a') as f:
         f.write('PLOT: CHEGOU REQ--------------------------------------------\n')
+        f.write(f'{json.dumps(request.json,indent=2)}\n')
     filename = request.json[Constants.FILE_NAME]
     plot = request.json[Constants.PLOT]
     model = request.json[Constants.MODEL]
