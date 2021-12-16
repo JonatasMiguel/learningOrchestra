@@ -33,7 +33,7 @@ class PlotterClassification:
 
     @staticmethod
     def get_path_volume(filename: str) -> str:
-        return f'{os.environ[Constants.CODE_EXECUTOR_VOLUME_PATH]}/{filename}'
+        return f'/usr/src/code_executor/{filename}'
 
     @staticmethod
     def get_name_default(plot: str):
