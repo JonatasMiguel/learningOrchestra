@@ -1849,6 +1849,23 @@
         }
       ]
     }
+    ,
+    {
+      "endpoint": "/api/learningOrchestra/v1/explore/pycaret2",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "method": "GET",
+          "url_pattern": "/plotPycaret2",
+          "host": [
+            "http://codexecutor:5009"
+          ],
+          "extra_config": {}
+        }
+      ]
+    }
   ],
   "extra_config": {
     "github_com/devopsfaith/krakend-metrics": {

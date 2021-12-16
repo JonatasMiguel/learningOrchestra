@@ -31,6 +31,9 @@ class PlotterClassification:
     def get_path_plot(self) -> str:
         return PlotterClassification.get_path_volume(self.__name)
 
+    def get_path_plot_by_type(self) -> str:
+        return PlotterClassification.get_path_volume(PlotterClassification.get_name_default(self.__plot))
+
     @staticmethod
     def get_path_volume(filename: str) -> str:
         return f'/usr/src/code_executor/{filename}'

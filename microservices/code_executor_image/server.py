@@ -23,6 +23,32 @@ parameters_handler = Parameters(database, data)
 function_treat = Function()
 
 
+@app.route(f'{Constants.PLOT_URI_PATH2}', methods=["GET"])
+def get_file():
+    try:
+        with open('resultados.txt', 'a') as f:
+            f.write('PLOT: CHEGOU REQ--------------------------------------------\n')
+            f.write(f'{json.dumps(request.json, indent=2)}\n')
+
+        filename = request.json[Constants.FILE_NAME]
+        plot = request.json[Constants.PLOT]
+        model = request.json[Constants.MODEL]
+
+        plotter = PlotterClassification(filename, plot, model)
+
+        path = plotter.get_path_plot_by_type()
+
+        with open('resultados.txt', 'a') as f:
+            f.write(f'PLOT: ENVIANDO PNG REQ--------------------------------------------{path}\n')
+    except Exception as error:
+        with open('resultados.txt', 'a') as f:
+            f.write(f'pau 0{error.__cause__}\n')
+            f.write(f'pau 0{repr(error)}\n')
+            f.write(f'pau 0{str(error)}\n')
+
+    return send_file(path, as_attachment=True)
+
+
 @app.route(f'{Constants.PLOT_URI_PATH}', methods=["GET"])
 def get_file():
     try:

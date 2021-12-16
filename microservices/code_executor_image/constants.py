@@ -77,5 +77,7 @@ class Constants:
 
     PLOT_URI_PATH = "/plotPycaret"
 
+    PLOT_URI_PATH2 = "/plotPycaret2"
+
     FIRST_ARGUMENT = 0
     SECOND_ARGUMENT = 1
