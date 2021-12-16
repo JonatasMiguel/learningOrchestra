@@ -1,4 +1,7 @@
 class Constants:
+    FILE_NAME = "filename"
+    PLOT = "plot"
+    MODEL = "model"
     FINISHED_FIELD_NAME = "finished"
     NAME_FIELD_NAME = "name"
     DESCRIPTION_FIELD_NAME = "description"
@@ -71,6 +74,8 @@ class Constants:
 
     MICROSERVICE_URI_PATH = "/codeExecutor"
     MICROSERVICE_URI_GET_PARAMS = "?query={}&limit=20&skip=0"
+
+    PLOT_URI_PATH = "/plotPycaret"
 
     FIRST_ARGUMENT = 0
     SECOND_ARGUMENT = 1

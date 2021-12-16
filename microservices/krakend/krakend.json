@@ -1832,6 +1832,22 @@
           "extra_config": {}
         }
       ]
+    },
+    {
+      "endpoint": "/api/learningOrchestra/v1/explore/pycaret",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "method": "GET",
+          "url_pattern": "/plotPycaret",
+          "host": [
+            "http://codexecutor:5009"
+          ],
+          "extra_config": {}
+        }
+      ]
     }
   ],
   "extra_config": {
