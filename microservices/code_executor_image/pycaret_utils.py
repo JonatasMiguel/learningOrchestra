@@ -17,7 +17,7 @@ class PlotterClassification:
                 f.write('Tentando carregar\n')
                 model = self.classification.load_model(self.__model)
                 f.write('Tentando plotar\n')
-                self.classification.plot_model(model, self.__plot, save=True)
+                self.classification.plot_model(model[-1], self.__plot, save=True)
         except Exception as error:
             with open('resultados.txt', 'a') as f:
                 f.write(f'pau 1{error.__cause__}\n')
