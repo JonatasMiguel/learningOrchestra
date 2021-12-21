@@ -48,7 +48,7 @@ def get_file():
 
 
 @app.route(f'{Constants.PLOT_URI_PATH}', methods=["GET"])
-def get_file():
+def get_plot():
     try:
         with open('resultados.txt', 'a') as f:
             f.write('PLOT: CHEGOU REQ--------------------------------------------\n')
