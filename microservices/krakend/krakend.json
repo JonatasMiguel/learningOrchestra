@@ -1851,14 +1851,14 @@
     }
     ,
     {
-      "endpoint": "/api/learningOrchestra/v1/explore/pycaret2",
+      "endpoint": "/api/learningOrchestra/v1/explore/getlocaldatapycaret",
       "method": "GET",
       "output_encoding": "no-op",
       "backend": [
         {
           "encoding": "no-op",
           "method": "GET",
-          "url_pattern": "/plotPycaret2",
+          "url_pattern": "/GetLocalDataPycaret",
           "host": [
             "http://codexecutor:5009"
           ],

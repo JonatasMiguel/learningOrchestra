@@ -3,6 +3,12 @@ import os
 from constants import Constants
 
 
+class GetDataLocal:
+    @staticmethod
+    def get_path_volume(filename: str) -> str:
+        return f'/usr/src/code_executor/{filename}'
+
+
 class PlotterClassification:
     from pycaret import classification
 
@@ -25,18 +31,14 @@ class PlotterClassification:
                 f.write(f'pau 1{str(error)}\n')
 
     def rename_file(self) -> None:
-        os.rename(PlotterClassification.get_path_volume(PlotterClassification.get_name_default(self.__plot)),
-                  PlotterClassification.get_path_volume(self.__name))
+        os.rename(GetDataLocal.get_path_volume(PlotterClassification.get_name_default(self.__plot)),
+                  GetDataLocal.get_path_volume(self.__name))
 
     def get_path_plot(self) -> str:
-        return PlotterClassification.get_path_volume(self.__name)
+        return GetDataLocal.get_path_volume(self.__name)
 
     def get_path_plot_by_type(self) -> str:
-        return PlotterClassification.get_path_volume(PlotterClassification.get_name_default(self.__plot))
-
-    @staticmethod
-    def get_path_volume(filename: str) -> str:
-        return f'/usr/src/code_executor/{filename}'
+        return GetDataLocal.get_path_volume(PlotterClassification.get_name_default(self.__plot))
 
     @staticmethod
     def get_name_default(plot: str):

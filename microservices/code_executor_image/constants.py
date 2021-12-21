@@ -77,7 +77,7 @@ class Constants:
 
     PLOT_URI_PATH = "/plotPycaret"
 
-    PLOT_URI_PATH2 = "/plotPycaret2"
+    GET_LOCAL_DATA_URI_PATH = "/GetLocalDataPycaret"
 
     FIRST_ARGUMENT = 0
     SECOND_ARGUMENT = 1

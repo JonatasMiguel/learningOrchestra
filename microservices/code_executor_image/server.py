@@ -4,7 +4,7 @@ from code_execution import Parameters, Function, Execution
 from utils import Data, Database, UserRequest, Metadata, ObjectStorage
 from typing import Union
 from constants import Constants
-from pycaret_utils import PlotterClassification
+from pycaret_utils import PlotterClassification, GetDataLocal
 import json
 
 app = Flask(__name__)
@@ -23,7 +23,7 @@ parameters_handler = Parameters(database, data)
 function_treat = Function()
 
 
-@app.route(f'{Constants.PLOT_URI_PATH2}', methods=["GET"])
+@app.route(f'{Constants.GET_LOCAL_DATA_URI_PATH}', methods=["GET"])
 def get_file():
     try:
         with open('resultados.txt', 'a') as f:
@@ -31,12 +31,10 @@ def get_file():
             f.write(f'{json.dumps(request.json, indent=2)}\n')
 
         filename = request.json[Constants.FILE_NAME]
-        plot = request.json[Constants.PLOT]
-        model = request.json[Constants.MODEL]
 
-        plotter = PlotterClassification(filename, plot, model)
-
-        path = plotter.get_path_plot_by_type()
+        path = GetDataLocal.get_path_volume(filename)
+        with open('resultados.txt', 'a') as f:
+            f.write(f' caminho do recurso {path}\n')
 
         with open('resultados.txt', 'a') as f:
             f.write(f'PLOT: ENVIANDO PNG REQ--------------------------------------------{path}\n')
