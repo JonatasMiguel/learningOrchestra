@@ -32,17 +32,37 @@ class Projection:
     def __execute_spark_job(self, projection_filename: str, fields: list,
                             database_url_input: str,
                             database_url_output: str) -> None:
-        dataframe = self.__spark_session.read.format(
-            self.__MONGO_SPARK_SOURCE).option(
-            "spark.mongodb.input.uri", database_url_input).load()
-        dataframe = dataframe.filter(
-            dataframe[self.__DOCUMENT_ID] != self.__METADATA_FILE_ID
-        )
+        with open('resultados.txt', 'a') as f:
+            f.write(f'===========iniciando __execute_spark_job')
+        try:
+            with open('resultados.txt', 'a') as f:
+                f.write(f'1')
+            dataframe = self.__spark_session.read.format(
+                self.__MONGO_SPARK_SOURCE).option(
+                "spark.mongodb.input.uri", database_url_input).load()
+            with open('resultados.txt', 'a') as f:
+                f.write(f'2')
+            dataframe = dataframe.filter(
+                dataframe[self.__DOCUMENT_ID] != self.__METADATA_FILE_ID
+            )
+            with open('resultados.txt', 'a') as f:
+                f.write(f'3')
+            fields.append(self.__DOCUMENT_ID)
+            with open('resultados.txt', 'a') as f:
+                f.write(f'4')
+            projection_dataframe = dataframe.select(*fields)
+            with open('resultados.txt', 'a') as f:
+                f.write(f'5')
+            projection_dataframe.write.format(
+                self.__MONGO_SPARK_SOURCE).mode("append").option(
+                "spark.mongodb.output.uri", database_url_output).save()
+            with open('resultados.txt', 'a') as f:
+                f.write(f'6')
 
-        fields.append(self.__DOCUMENT_ID)
-        projection_dataframe = dataframe.select(*fields)
-        projection_dataframe.write.format(
-            self.__MONGO_SPARK_SOURCE).mode("append").option(
-            "spark.mongodb.output.uri", database_url_output).save()
+            self.__metadata_creator.update_finished_flag(projection_filename, True)
+        except Exception as error:
+            with open('resultados.txt', 'a') as f:
+                f.write(f'pau 1{error.__cause__}\n')
+                f.write(f'pau 1{repr(error)}\n')
+                f.write(f'pau 1{str(error)}\n')
 
-        self.__metadata_creator.update_finished_flag(projection_filename, True)

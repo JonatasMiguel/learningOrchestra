@@ -3,6 +3,7 @@ import os
 from projection import Projection
 from utils import Database, UserRequest, Metadata
 from pyspark.sql import SparkSession
+import json
 
 SPARKMASTER_HOST = "SPARKMASTER_HOST"
 SPARKMASTER_PORT = "SPARKMASTER_PORT"
@@ -71,10 +72,15 @@ spark_session = SparkSession.builder. \
 
 @app.route("/projections", methods=["POST"])
 def create_projection():
+    with open('resultados.txt', 'a') as f:
+        f.write('projections: CHEGOU REQ--------------------------------------------\n')
+        f.write(f'{json.dumps(request.json, indent=2)}\n')
+
     parent_filename = request.json[PARENT_FILENAME_NAME]
     projection_filename = request.json[PROJECTION_FILENAME_NAME]
     projection_fields = request.json[FIELDS_NAME]
-
+    with open('resultados.txt', 'a') as f:
+        f.write(f' analisando req')
     request_errors = analyse_request_errors(
         request_validator,
         parent_filename,
@@ -82,7 +88,16 @@ def create_projection():
         projection_fields)
 
     if request_errors is not None:
+        with open('resultados.txt', 'a') as f:
+            f.write(f'erro na request {request_errors}')
         return request_errors
+
+    with open('resultados.txt', 'a') as f:
+        f.write(f'coletando dados ')
+        f.write(f'database_url: {database_url} ')
+        f.write(f'database_name: {database_name} ')
+        f.write(f'parent_filename: {parent_filename} ')
+        f.write(f'database_replica_set: {database_replica_set} ')
 
     database_url_input = Database.collection_database_url(
         database_url,
@@ -91,6 +106,13 @@ def create_projection():
         database_replica_set,
     )
 
+    with open('resultados.txt', 'a') as f:
+        f.write(f'coletando dados2')
+        f.write(f'database_url: {database_url} ')
+        f.write(f'database_name: {database_name} ')
+        f.write(f' > projection_filename: {projection_filename} ')
+        f.write(f'database_replica_set: {database_replica_set} ')
+
     database_url_output = Database.collection_database_url(
         database_url,
         database_name,
@@ -98,10 +120,15 @@ def create_projection():
         database_replica_set,
     )
 
+    with open('resultados.txt', 'a') as f:
+        f.write(f'iniciando projection')
     projection = Projection(metadata_creator, spark_session)
     projection.create(
         parent_filename, projection_filename,
         projection_fields, database_url_input, database_url_output)
+
+    with open('resultados.txt', 'a') as f:
+        f.write(f'retornando check')
 
     return (
         jsonify({
@@ -155,6 +182,7 @@ def analyse_request_errors(request_validator, parent_filename,
 
 
 if __name__ == "__main__":
+    open('resultados.txt', 'w')
     app.run(
         host=os.environ[PROJECTION_HOST_IP],
         port=int(os.environ[PROJECTION_HOST_PORT])
