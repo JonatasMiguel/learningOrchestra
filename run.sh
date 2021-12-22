@@ -118,6 +118,13 @@ echo "Pushing codeExecutor microservice image..."
 echo "--------------------------------------------------------------------"
 docker push $code_executor_repository
 
+pycaret_executor_repository=127.0.0.1:5050/pycaret_executor
+
+echo "--------------------------------------------------------------------"
+echo "Pushing pycaretExecutor microservice image..."
+echo "--------------------------------------------------------------------"
+docker push $pycaret_executor_repository
+
 
 echo "--------------------------------------------------------------------"
 echo "Updating portainer agent microservice in each cluster node..."
