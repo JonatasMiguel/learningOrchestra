@@ -129,6 +129,106 @@ services:
         constraints:
           - "node.role==manager"
 
+  sparkmaster:
+    build: microservices/spark_image
+    image: 127.0.0.1:5050/spark
+    ports:
+      - "4040:4040"
+      - "7077:7077"
+      - "8080:8080"
+    environment:
+      - SPARK_ROLE=master
+    deploy: *default-deploy-worker
+    networks:
+      - spark
+      - database
+
+  sparkworker:
+    image: 127.0.0.1:5050/spark
+    entrypoint: dockerize -wait tcp://sparkmaster:7077 -timeout 240s /sbin/my_init
+    ports:
+      - "8081:8081"
+      - "41352:41352"
+    links:
+      - sparkmaster
+    environment:
+      - SPARK_MASTER=sparkmaster
+      - SPARK_ROLE=slave
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - "node.role==worker"
+    networks:
+      - spark
+      - database
+
+  projection:
+    build: microservices/projection_image
+    image: 127.0.0.1:5050/projection
+    ports:
+      - "5001:5001"
+      - "41000:41000"
+    extra_hosts:
+      - "projection:0.0.0.0"
+    depends_on:
+      - databaseprimary
+      - images
+      - sparkmaster
+      - sparkworker
+    deploy: *default-deploy-worker
+    networks:
+      - database
+      - spark
+    environment: *default-service-database-env
+
+  builder:
+    build: microservices/builder_image
+    image: 127.0.0.1:5050/builder
+    ports:
+      - "5002:5002"
+      - "41100:41100"
+    extra_hosts:
+      - "builder:0.0.0.0"
+    depends_on:
+      - databaseprimary
+      - images
+      - sparkmaster
+      - sparkworker
+    deploy: *default-deploy-worker
+    networks:
+      - database
+      - spark
+    environment: *default-service-database-env
+
+  datatypehandler:
+    build: microservices/data_type_handler_image
+    image: 127.0.0.1:5050/data_type_handler
+    ports:
+      - "5003:5003"
+    depends_on:
+      - databaseprimary
+      - images
+    deploy: *default-deploy-worker
+    networks:
+      - database
+    environment: *default-service-database-env
+
+  histogram:
+    build: microservices/histogram_image
+    image: 127.0.0.1:5050/histogram
+    ports:
+      - "5004:5004"
+    depends_on:
+      - databaseprimary
+      - images
+    deploy: *default-deploy-worker
+    networks:
+      - database
+    environment: *default-service-database-env
+
   databasexecutor:
     build: microservices/database_executor_image
     image: 127.0.0.1:5050/database_executor
