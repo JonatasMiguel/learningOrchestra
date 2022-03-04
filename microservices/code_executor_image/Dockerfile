@@ -4,7 +4,7 @@ WORKDIR /usr/src/code_executor
 COPY . /usr/src/code_executor
 
 
-RUN apt-get update && apt-get install -y libgomp1
+RUN sudo apt-get update && apt-get install -y libgomp1
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 RUN pip install -r requirements.txt
