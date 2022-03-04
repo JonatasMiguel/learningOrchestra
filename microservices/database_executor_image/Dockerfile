@@ -1,5 +1,4 @@
-FROM python:3.7-slim
-
+FROM armswdev/tensorflow-arm-neoverse
 WORKDIR /usr/src/database_executor
 COPY . /usr/src/database_executor
 
