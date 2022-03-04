@@ -3,6 +3,9 @@ FROM python:3.7-slim
 WORKDIR /usr/src/database_executor
 COPY . /usr/src/database_executor
 
+RUN apt-get update && apt-get install -y libgomp1
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
 RUN pip install -r requirements.txt
 
 ENV MICROSERVICE_IP "0.0.0.0"
