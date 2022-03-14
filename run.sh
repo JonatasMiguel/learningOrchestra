@@ -5,8 +5,13 @@ echo "--------------------------------------------------------------------"
 echo "Building the learningOrchestra microservice images..."
 echo "--------------------------------------------------------------------"
 
-docker build --tag 127.0.0.1:5050/spark_task:latest microservices/spark_task_image
-docker push 127.0.0.1:5050/spark_task:latest
+docker run -d \
+  -p 6000:5000 \
+  --name registry-test \
+  registry:2
+
+docker build --tag 127.0.0.1:6000/spark_task:latest microservices/spark_task_image
+docker push 127.0.0.1:6000/spark_task:latest
 
 docker-compose build
 
