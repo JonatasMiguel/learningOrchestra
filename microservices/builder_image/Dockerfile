@@ -1,4 +1,4 @@
-FROM spark_task
+FROM 127.0.0.1:6000/spark_task:latest
 
 WORKDIR /usr/src/builder
 COPY . /usr/src/builder
