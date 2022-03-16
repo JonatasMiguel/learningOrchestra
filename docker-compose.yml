@@ -130,7 +130,7 @@ services:
           - "node.role==manager"
 
   sparkmaster:
-    build: microservices/spark_image:latest
+    build: microservices/spark_image
     image: 127.0.0.1:6000/spark:latest
     ports:
       - "4040:4040"
