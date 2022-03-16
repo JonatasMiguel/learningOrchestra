@@ -9,3 +9,7 @@ dill==0.3.3
 # they are used directly by user on API request.
 pandas
 numpy
+nltk
+tensorflow
+tensorflow-datasets
+pycaret
