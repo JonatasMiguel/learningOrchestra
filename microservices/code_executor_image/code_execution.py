@@ -6,7 +6,6 @@ import sys
 import validators
 import requests
 import traceback
-from pycaret import *
 
 
 
