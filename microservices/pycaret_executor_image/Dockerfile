@@ -1,4 +1,4 @@
-FROM armswdev/tensorflow-arm-neoverse
+FROM prettycodes/pycaret-python
 
 WORKDIR /usr/src/code_executor
 COPY . /usr/src/code_executor
