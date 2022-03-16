@@ -167,7 +167,7 @@ services:
 
   projection:
     build: microservices/projection_image
-    image: 127.0.0.1:5050/projection
+    image: 127.0.0.1:5050/projection:latest
     ports:
       - "5001:5001"
       - "41000:41000"
@@ -186,7 +186,7 @@ services:
 
   builder:
     build: microservices/builder_image
-    image: 127.0.0.1:5050/builder
+    image: 127.0.0.1:5050/builder:latest
     ports:
       - "5002:5002"
       - "41100:41100"

@@ -20,7 +20,7 @@ echo "Adding the microservice images in docker daemon security exception..."
 echo "--------------------------------------------------------------------"
 
 echo '{
-  "insecure-registries" : ["myregistry:5050"]
+  "insecure-registries" : ["myregistry:5050", "myregistry2:6000"]
 }
 ' > /etc/docker/daemon.json
 
