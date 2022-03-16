@@ -29,6 +29,7 @@ echo "Restarting docker service..."
 echo "--------------------------------------------------------------------"
 
 service docker restart
+docker start registry-test
 
 echo "--------------------------------------------------------------------"
 echo "Deploying learningOrchestra in swarm cluster..."
