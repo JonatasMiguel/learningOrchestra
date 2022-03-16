@@ -1,4 +1,4 @@
-FROM prettycodes/pycaret-python
+FROM pycaret/full
 
 WORKDIR /usr/src/code_executor
 COPY . /usr/src/code_executor
