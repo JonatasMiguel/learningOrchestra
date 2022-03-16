@@ -52,7 +52,7 @@ echo "--------------------------------------------------------------------"
 docker push $database_api_repository
 
 
-spark_repository=127.0.0.1:5050/spark
+spark_repository=127.0.0.1:6000/spark:latest
 
 echo "--------------------------------------------------------------------"
 echo "Pushing spark image..."
