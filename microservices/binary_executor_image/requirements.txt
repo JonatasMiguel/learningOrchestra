@@ -1,5 +1,5 @@
 pymongo==3.10.1
-flask==1.1.2
+flask
 datetime==4.3
 pytz==2020.1
 dill==0.3.3
