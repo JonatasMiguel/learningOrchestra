@@ -320,9 +320,6 @@ services:
   pycaretxecutor:
     build: microservices/pycaret_executor_image
     image: 127.0.0.1:5050/pycaret_executor
-    user: root
-    environment:
-      GRANT_SUDO: "yes"
     ports:
       - "5010:5010"
     depends_on:
