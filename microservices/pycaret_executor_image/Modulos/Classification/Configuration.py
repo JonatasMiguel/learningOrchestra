@@ -1,5 +1,5 @@
 from pycaret import classification
-from Utils.SetupParameterHandler import ParametersSetupHandler
+from SetupParameterHandler import ParametersSetupHandler
 
 class ClassificationConfig:
     def __init__(self, id, data_set):
