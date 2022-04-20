@@ -78,6 +78,9 @@ class Constants:
     PLOT_URI_PATH = "/plotPycaret"
 
     GET_LOCAL_DATA_URI_PATH = "/GetLocalDataPycaret"
+    SETUP_URI_PATH = "/Setup"
+    CONFIG_FIELD_NAME = "configName"
+    SETUP_PARAMETERS_FIELD_NAME = "setupParameters"
 
     FIRST_ARGUMENT = 0
     SECOND_ARGUMENT = 1

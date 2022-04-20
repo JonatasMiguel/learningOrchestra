@@ -1,4 +1,4 @@
-FROM python:3.7-slim
+FROM pycaret/full
 
 WORKDIR /usr/src/code_executor
 COPY . /usr/src/code_executor
