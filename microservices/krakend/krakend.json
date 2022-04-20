@@ -1866,6 +1866,23 @@
         }
       ]
     }
+    ,
+    {
+      "endpoint": "/api/learningOrchestra/v1/setup/pycaret",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "method": "POST",
+          "url_pattern": "/Setup",
+          "host": [
+            "http://pycaretxecutor:5010"
+          ],
+          "extra_config": {}
+        }
+      ]
+    }
   ],
   "extra_config": {
     "github_com/devopsfaith/krakend-metrics": {
