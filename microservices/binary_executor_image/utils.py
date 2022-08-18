@@ -149,13 +149,13 @@ class UserRequest:
         filenames = self.__database.get_filenames()
 
         if filename in filenames:
-            raise Exception(self.__MESSAGE_DUPLICATE_FILE)
+            raise Exception(f'{self.__MESSAGE_DUPLICATE_FILE}: filenames => {filenames}')
 
     def existent_filename_validator(self, filename: str) -> None:
         filenames = self.__database.get_filenames()
 
         if filename not in filenames:
-            raise Exception(self.__MESSAGE_NONEXISTENT_FILE)
+            raise Exception(f'{self.__MESSAGE_NONEXISTENT_FILE} filenames => {filenames}')
 
     def valid_method_class_validator(self, tool_name: str,
                                      class_name: str,
