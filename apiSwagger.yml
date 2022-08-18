@@ -1,0 +1,1901 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/JONATASMIGUEL_1/AutoMlTools/1.0.0
+info:
+  version: "1.0.0"
+  title: learningOrchestra-automltools
+  description: The API for the EatBacon IOT project
+
+paths:
+  /api/learningOrchestra/v1/setup/pycaret/:
+    post:
+      tags:
+      - setup/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: modelName
+          in: query
+          description: Nome da configuração do experimento com pycaret
+          schema:
+            type: string
+        - name: description
+          in: query
+          description: descrição
+          schema:
+            type: string
+        - name: modulePath 
+          in: query
+          description: caminho do metodo
+          schema:
+            type: string
+        - name : class 
+          in: query
+          description: nome do metodo a ser chamado
+          schema:
+            type: string   
+        - name: classParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name" 
+
+  /api/learningOrchestra/v1/setup/pycaret/{modelName}:
+    get:
+      tags:
+        - setup/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: modelName
+          in: path
+          required: true
+          description: Nome da configuração do experimento com pycaret
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+
+    delete:
+      tags:
+        - setup/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: modelName
+          in: path
+          required: true
+          description: Nome da configuração do experimento com pycaret
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "deleted file"
+                    
+        '404':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "parent name doesn't exist"  
+
+    patch:
+      tags:
+        - setup/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: modelName
+          in: path
+          required: true
+          description: Nome da configuração do experimento com pycaret
+          schema:
+            type: string
+        - name: description
+          in: query
+          description: descrição
+          schema:
+            type: string
+        - name: modulePath 
+          in: query
+          description: caminho do metodo
+          schema:
+            type: string
+        - name : class 
+          in: query
+          description: nome do metodo a ser chamado
+          schema:
+            type: string   
+        - name: classParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name" 
+                  
+  /api/learningOrchestra/v1/setup/autokeras/:
+    post:
+      tags:
+      - setup/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: modelName
+          in: query
+          description: Nome da configuração do experimento com autokeras
+          schema:
+            type: string
+        - name: description
+          in: query
+          description: descrição
+          schema:
+            type: string
+        - name: modulePath 
+          in: query
+          description: caminho do metodo
+          schema:
+            type: string
+        - name : class 
+          in: query
+          description: nome do metodo a ser chamado
+          schema:
+            type: string   
+        - name: classParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name" 
+
+  /api/learningOrchestra/v1/setup/autokeras/{modelName}:
+    get:
+      tags:
+        - setup/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: modelName
+          in: path
+          required: true
+          description: Nome da configuração do experimento com autokeras
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+
+    delete:
+      tags:
+        - setup/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: modelName
+          in: path
+          required: true
+          description: Nome da configuração do experimento com autokeras
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "deleted file"
+                    
+        '404':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "parent name doesn't exist"  
+
+    patch:
+      tags:
+        - setup/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: modelName
+          in: path
+          required: true
+          description: Nome da configuração do experimento com autokeras
+          schema:
+            type: string
+        - name: description
+          in: query
+          description: descrição
+          schema:
+            type: string
+        - name: modulePath 
+          in: query
+          description: caminho do metodo
+          schema:
+            type: string
+        - name : class 
+          in: query
+          description: nome do metodo a ser chamado
+          schema:
+            type: string   
+        - name: classParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name" 
+                  
+###############################################################################################################################################                  
+  /api/learningOrchestra/v1/train/pycaret/:
+    post:
+      tags:
+      - train/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com pycaret
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo a ser gerado
+          schema:
+            type: string
+        - name: name 
+          in: query
+          description: nome do arquivo a ser gerado
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: fit
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name" 
+
+  /api/learningOrchestra/v1/train/pycaret/{name}:
+    get:
+      tags:
+        - train/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome do modelo treinado
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+
+    delete:
+      tags:
+        - train/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome do modelo treinado
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "deleted file"
+                    
+        '404':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "parent name doesn't exist"  
+
+    patch:
+      tags:
+        - train/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com pycaret
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo a ser gerado
+          schema:
+            type: string
+        - name: name 
+          in: path
+          required: true
+          description: nome do arquivo a ser gerado
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: some description
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name"      
+                  
+  /api/learningOrchestra/v1/train/autokeras/:
+    post:
+      tags:
+      - train/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com autokeras
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo a ser gerado
+          schema:
+            type: string
+        - name: name 
+          in: query
+          description: nome do arquivo a ser gerado
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: fit
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name" 
+
+  /api/learningOrchestra/v1/train/autokeras/{name}:
+    get:
+      tags:
+        - train/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome do modelo treinado
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+
+    delete:
+      tags:
+        - train/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome do modelo treinado
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "deleted file"
+                    
+        '404':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "parent name doesn't exist"  
+
+    patch:
+      tags:
+        - train/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com autokeras
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo a ser gerado
+          schema:
+            type: string
+        - name: name 
+          in: path
+          required: true
+          description: nome do arquivo a ser gerado
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: some description
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name"                      
+#################################################################################################################################################
+
+  /api/learningOrchestra/v1/predict/pycaret/:
+    post:
+      tags:
+      - predict/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com pycaret
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo 
+          schema:
+            type: string
+        - name: name 
+          in: query
+          description: nome do resultado predito
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: some description
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name" 
+
+  /api/learningOrchestra/v1/predict/pycaret/{name}:
+    get:
+      tags:
+        - predict/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome da predição realizada
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+
+    delete:
+      tags:
+        - predict/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome da predição realizada
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "deleted file"
+                    
+        '404':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "parent name doesn't exist"  
+
+    patch:
+      tags:
+        - predict/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com pycaret
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo a ser gerado
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: nome da predição realizada
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: some description
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name"     
+                  
+  /api/learningOrchestra/v1/predict/autokeras/:
+    post:
+      tags:
+      - predict/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com autokeras
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo 
+          schema:
+            type: string
+        - name: name 
+          in: query
+          description: nome do resultado predito
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: some description
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name" 
+
+  /api/learningOrchestra/v1/predict/autokeras/{name}:
+    get:
+      tags:
+        - predict/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome da predição realizada
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+
+    delete:
+      tags:
+        - predict/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome da predição realizada
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "deleted file"
+                    
+        '404':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "parent name doesn't exist"  
+
+    patch:
+      tags:
+        - predict/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com autokeras
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo a ser gerado
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: nome da predição realizada
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: some description
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name"                     
+
+#################################################################################################################################################
+
+  /api/learningOrchestra/v1/explore/pycaret/:
+    post:
+      tags:
+      - explore/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: inputDatasetName
+          in: query
+          description: name of dataset to use
+          schema:
+            type: string
+        - name: outputDatasetName
+          in: query
+          description: Nome do modelo 
+          schema:
+            type: string
+        - name: names 
+          in: query
+          description: list of fields
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/explore/histogram?titanicTrainHistogram?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "invalid fields"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated projection name" 
+
+  /api/learningOrchestra/v1/explore/pycaret/{histogramName}:
+    get:
+      tags:
+        - explore/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: histogramName
+          in: path
+          required: true
+          description: nome da predição realizada
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+
+    delete:
+      tags:
+        - explore/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: histogramName
+          in: path
+          required: true
+          description: nome da predição realizada
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "deleted file"
+                    
+        '404':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "parent name doesn't exist"  
+                  
+  /api/learningOrchestra/v1/explore/autokeras/:
+    post:
+      tags:
+      - explore/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: inputDatasetName
+          in: query
+          description: name of dataset to use
+          schema:
+            type: string
+        - name: outputDatasetName
+          in: query
+          description: Nome do modelo 
+          schema:
+            type: string
+        - name: names 
+          in: query
+          description: list of fields
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/explore/histogram?titanicTrainHistogram?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "invalid fields"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated projection name" 
+
+  /api/learningOrchestra/v1/explore/autokeras/{histogramName}:
+    get:
+      tags:
+        - explore/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: histogramName
+          in: path
+          required: true
+          description: nome da predição realizada
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+
+    delete:
+      tags:
+        - explore/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: histogramName
+          in: path
+          required: true
+          description: nome da predição realizada
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "deleted file"
+                    
+        '404':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "parent name doesn't exist"                    
+
+#################################################################################################################################################
+  /api/learningOrchestra/v1/evaluate/pycaret/:
+    post:
+      tags:
+      - evaluate/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com pycaret
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo 
+          schema:
+            type: string
+        - name: name 
+          in: query
+          description: nome do resultado predito
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: evaluate_model
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name" 
+  /api/learningOrchestra/v1/evaluate/pycaret/{name}:
+    get:
+      tags:
+        - evaluate/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome da avaliação
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+    delete:
+      tags:
+        - evaluate/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome da avaliação
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "deleted file"
+                    
+        '404':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "parent name doesn't exist"  
+    patch:
+      tags:
+        - evaluate/pycaret
+      description: Returns all pycaret's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com pycaret
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo 
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: nome da avaliação
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: evaluate_model
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name"    
+                  
+  /api/learningOrchestra/v1/evaluate/autokeras/:
+    post:
+      tags:
+      - evaluate/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com autokeras
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo 
+          schema:
+            type: string
+        - name: name 
+          in: query
+          description: nome do resultado predito
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: evaluate_model
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name" 
+  /api/learningOrchestra/v1/evaluate/autokeras/{name}:
+    get:
+      tags:
+        - evaluate/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome da avaliação
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+    delete:
+      tags:
+        - evaluate/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: nome da avaliação
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "deleted file"
+                    
+        '404':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "parent name doesn't exist"  
+    patch:
+      tags:
+        - evaluate/autokeras
+      description: Returns all autokeras's setup created 
+      parameters:
+        - name: parentName
+          in: query
+          description: Nome da configuração do experimento com autokeras
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: Nome do modelo 
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: nome da avaliação
+          schema:
+            type: string
+        - name : description 
+          in: query
+          description: some description
+          schema:
+            type: string 
+        - name : method 
+          in: query
+          description: evaluate_model
+          schema:
+            type: string    
+        - name: methodParameters 
+          in: query
+          description: parametros do metodo
+          schema:
+            type: array        
+            items: {}
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                    
+        '406':
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+        '409':
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  result:
+                    type: string
+                example:  
+                  result: "duplicated model name"                      
+                               
+
+components:
+  schemas:
+    Schema:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
