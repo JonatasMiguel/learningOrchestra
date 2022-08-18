@@ -37,27 +37,34 @@ class Constants:
 
     MODEL_SCIKITLEARN_TYPE = "model/scikitlearn"
     MODEL_TENSORFLOW_TYPE = "model/tensorflow"
+    MODEL_AUTOKERAS_TYPE = "model/autokeras"
 
     TUNE_SCIKITLEARN_TYPE = "tune/scikitlearn"
     TUNE_TENSORFLOW_TYPE = "tune/tensorflow"
 
     TRAIN_SCIKITLEARN_TYPE = "train/scikitlearn"
     TRAIN_TENSORFLOW_TYPE = "train/tensorflow"
+    TRAIN_AUTOKERAS_TYPE = "train/autokeras"
 
     EVALUATE_SCIKITLEARN_TYPE = "evaluate/scikitlearn"
     EVALUATE_TENSORFLOW_TYPE = "evaluate/tensorflow"
+    EVALUATE_AUTOKERAS_TYPE = "evaluate/autokeras"
 
     PREDICT_SCIKITLEARN_TYPE = "predict/scikitlearn"
     PREDICT_TENSORFLOW_TYPE = "predict/tensorflow"
+    PREDICT_AUTOKERAS_TYPE = "predict/autokeras"
+
 
     PYTHON_FUNCTION_TYPE = "function/python"
     DATASET_TENSORFLOW_TYPE = "dataset/tensorflow"
+    DATASET_AUTOKERAS_TYPE = "dataset/autokeras"
 
     TRANSFORM_SCIKITLEARN_TYPE = "transform/scikitlearn"
     TRANSFORM_TENSORFLOW_TYPE = "transform/tensorflow"
 
     EXPLORE_SCIKITLEARN_TYPE = "explore/scikitlearn"
     EXPLORE_TENSORFLOW_TYPE = "explore/tensorflow"
+    EXPLORE_AUTOKERAS_TYPE = "explore/autokeras"
 
     API_PATH = "/api/learningOrchestra/v1/"
 
@@ -66,10 +73,13 @@ class Constants:
         TUNE_TENSORFLOW_TYPE: f'{API_PATH}{TUNE_TENSORFLOW_TYPE}',
         TRAIN_SCIKITLEARN_TYPE: f'{API_PATH}{TRAIN_SCIKITLEARN_TYPE}',
         TRAIN_TENSORFLOW_TYPE: f'{API_PATH}{TRAIN_TENSORFLOW_TYPE}',
+        TRAIN_AUTOKERAS_TYPE: f'{API_PATH}{TRAIN_AUTOKERAS_TYPE}',
         EVALUATE_SCIKITLEARN_TYPE: f'{API_PATH}{EVALUATE_SCIKITLEARN_TYPE}',
         EVALUATE_TENSORFLOW_TYPE: f'{API_PATH}{EVALUATE_TENSORFLOW_TYPE}',
+        EVALUATE_AUTOKERAS_TYPE: f'{API_PATH}{EVALUATE_AUTOKERAS_TYPE}',
         PREDICT_SCIKITLEARN_TYPE: f'{API_PATH}{PREDICT_SCIKITLEARN_TYPE}',
         PREDICT_TENSORFLOW_TYPE: f'{API_PATH}{PREDICT_TENSORFLOW_TYPE}',
+        PREDICT_AUTOKERAS_TYPE: f'{API_PATH}{PREDICT_AUTOKERAS_TYPE}',
     }
 
     MICROSERVICE_URI_PATH = "/binaryExecutor"

@@ -271,7 +271,7 @@ services:
 
   binaryexecutor:
     build: microservices/binary_executor_image
-    image: learningorchestra/binary_executor
+    image: jonatasmiguel/learningorchestraautokerastrain:latest
     ports:
       - "5008:5008"
     depends_on:

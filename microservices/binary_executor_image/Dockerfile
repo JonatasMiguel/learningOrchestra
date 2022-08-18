@@ -1,8 +1,9 @@
-FROM python:3.7-slim
+FROM haifengjin/autokeras:latest
 
 WORKDIR /usr/src/binary_executor
 COPY . /usr/src/binary_executor
-RUN pip install -r requirements.txt
+RUN python3 -m pip install --upgrade pip \
+    && pip install -r requirements.txt
 
 ENV MICROSERVICE_IP "0.0.0.0"
 ENV MICROSERVICE_PORT 5008

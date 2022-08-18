@@ -8,7 +8,7 @@ from constants import Constants
 import pandas as pd
 import dill
 import os
-from tensorflow import keras
+from tensorflow import keras #todo:verificar se e necessario importar o autokeras
 import traceback
 
 
@@ -235,7 +235,8 @@ class ObjectStorage:
     @staticmethod
     def get_read_binary_path(filename: str, service_type: str) -> str:
         if service_type == Constants.MODEL_TENSORFLOW_TYPE or \
-                service_type == Constants.MODEL_SCIKITLEARN_TYPE:
+                service_type == Constants.MODEL_SCIKITLEARN_TYPE or \
+                service_type == Constants.MODEL_AUTOKERAS_TYPE:
             return f'{os.environ[Constants.MODELS_VOLUME_PATH]}/{filename}'
         elif service_type == Constants.TRANSFORM_TENSORFLOW_TYPE or \
                 service_type == Constants.TRANSFORM_SCIKITLEARN_TYPE:
@@ -258,7 +259,8 @@ class Data:
                                              name: str) -> tuple:
 
         model_types = [Constants.MODEL_TENSORFLOW_TYPE,
-                       Constants.MODEL_SCIKITLEARN_TYPE]
+                       Constants.MODEL_SCIKITLEARN_TYPE,
+                       Constants.MODEL_AUTOKERAS_TYPE]
         while self.get_type(name) not in model_types:
             instance_metadata = self.__database.find_one(
                 name,
@@ -334,14 +336,17 @@ class Data:
     def __is_stored_in_volume(self, filename: str) -> bool:
         volume_types = [
             Constants.MODEL_TENSORFLOW_TYPE,
+            Constants.MODEL_AUTOKERAS_TYPE,
             Constants.MODEL_SCIKITLEARN_TYPE,
             Constants.TUNE_TENSORFLOW_TYPE,
             Constants.TUNE_SCIKITLEARN_TYPE,
             Constants.TRAIN_TENSORFLOW_TYPE,
+            Constants.TRAIN_AUTOKERAS_TYPE,
             Constants.TRAIN_SCIKITLEARN_TYPE,
             Constants.EVALUATE_TENSORFLOW_TYPE,
             Constants.EVALUATE_SCIKITLEARN_TYPE,
             Constants.PREDICT_TENSORFLOW_TYPE,
+            Constants.PREDICT_AUTOKERAS_TYPE,
             Constants.PREDICT_SCIKITLEARN_TYPE,
             Constants.PYTHON_FUNCTION_TYPE,
             Constants.TRANSFORM_SCIKITLEARN_TYPE,
