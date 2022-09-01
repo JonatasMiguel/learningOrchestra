@@ -3,7 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from utils import Database, Data, Metadata, ObjectStorage
 from constants import Constants
 import traceback
-
+import logging
 
 class Parameters:
     __DATASET_KEY_CHARACTER = "$"
@@ -16,8 +16,9 @@ class Parameters:
         self.__data = data
 
     def treat(self, method_parameters: dict) -> dict:
+        logging.info('Start Parameters treat') 
         parameters = method_parameters.copy()
-
+        logging.info('Start Parameters copy') 
         for name, value in parameters.items():
             if type(value) is list:
                 new_value = []
@@ -26,14 +27,15 @@ class Parameters:
                 parameters[name] = new_value
             else:
                 parameters[name] = self.__treat_value(value)
-
+        logging.info('finish Parameters treat') 
         return parameters
 
     def __treat_value(self, value: object) -> object:
         if self.__is_dataset(value):
+            logging.info('Start __get_dataset_name_from_value') 
             dataset_name = self.__get_dataset_name_from_value(
                 value)
-
+            logging.info('Start __has_dot_in_dataset_name') 
             if self.__has_dot_in_dataset_name(value):
                 object_name = self.__get_name_after_dot_from_value(value)
                 return self.__data.get_object_from_dataset(
@@ -149,18 +151,25 @@ class Execution:
                    method_parameters: dict,
                    description: str) -> None:
         try:
+            logging.info('Start __pipeline')
             importlib.import_module(module_path)
+            logging.info('Start import_module')
             model_instance = self.__storage.read(self.parent_name,
                                                  self.parent_name_service_type)
+            logging.info('Start __storage.read')                                     
             method_result = self.__execute_a_object_method(model_instance,
                                                            self.class_method,
                                                            method_parameters)
+            logging.info('Start __execute_a_object_method')                                                           
             self.__storage.save(method_result, self.executor_name,
                                 self.executor_service_type)
+            logging.info('Start save')                                
             self.__metadata_creator.update_finished_flag(self.executor_name,
                                                          flag=True)
+            logging.info('Start update_finished_flag')                                                 
 
         except Exception as exception:
+            logging.warn(f'Exception: {str(exception)}')
             traceback.print_exc()
             self.__metadata_creator.create_execution_document(
                 self.executor_name,
@@ -176,9 +185,11 @@ class Execution:
 
     def __execute_a_object_method(self, class_instance: object, method: str,
                                   parameters: dict) -> object:
+        logging.info('Start getattr')                            
         class_method = getattr(class_instance, method)
-
+        logging.info('Start self.__parameters_handler.treat(parameters)') 
         treated_parameters = self.__parameters_handler.treat(parameters)
+        logging.info('Start class_method(**treated_parameters)') 
         method_result = class_method(**treated_parameters)
 
         if self.executor_service_type == Constants.TRAIN_TENSORFLOW_TYPE or \
