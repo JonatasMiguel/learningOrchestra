@@ -533,6 +533,22 @@
       ]
     },
     {
+      "endpoint": "/api/learningOrchestra/v1/setup/pycaret",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "method": "POST",
+          "url_pattern": "/setuppycaret?type=setup/pycaret",
+          "host": [
+            "http://setuppycaret:5007"
+          ],
+          "extra_config": {}
+        }
+      ]
+    },
+    {
       "endpoint": "/api/learningOrchestra/v1/model/autokeras/{modelName}",
       "method": "PATCH",
       "output_encoding": "no-op",

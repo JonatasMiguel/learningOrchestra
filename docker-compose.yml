@@ -269,6 +269,25 @@ services:
       - "model:/models"
       - "binary_executor:/binaries"
 
+  pycaret:
+    build: microservices/pycaret/setup
+    image: jonatasmiguel/modelsautokeras:latest
+    ports:
+      - "5007:5007"
+    depends_on:
+      - databaseprimary
+      - images
+    deploy: *default-deploy-manager
+    networks:
+      - database
+    environment: *default-service-database-env
+    volumes:
+      - "code_executor:/code_executions"
+      - "database_executor:/explore"
+      - "database_executor:/transform"
+      - "model:/models"
+      - "binary_executor:/binaries"      
+
   binaryexecutor:
     build: microservices/binary_executor_image
     image: jonatasmiguel/learningorchestraautokerastrain:latest
