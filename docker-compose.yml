@@ -273,7 +273,7 @@ services:
     build: microservices/pycaret/setup
     image: jonatasmiguel/pycaretsetuplo:latest
     ports:
-      - "5007:5007"
+      - "5077:5077"
     depends_on:
       - databaseprimary
       - images

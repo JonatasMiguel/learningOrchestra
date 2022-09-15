@@ -6,7 +6,7 @@ RUN python3 -m pip install --upgrade pip \
     && pip install -r requirements.txt
 
 ENV DEFAULT_MODEL_HOST_IP "0.0.0.0"
-ENV DEFAULT_MODEL_HOST_PORT 5007
+ENV DEFAULT_MODEL_HOST_PORT 5077
 
 ENV EXPLORE_VOLUME_PATH "/explore"
 ENV TRANSFORM_VOLUME_PATH "/transform"
