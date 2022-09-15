@@ -270,7 +270,7 @@ services:
       - "binary_executor:/binaries"
 
   pycaret:
-    build: microservices/pycaret/setup
+    build: microservices/pycaret/Setup
     image: jonatasmiguel/pycaretsetuplo:latest
     ports:
       - "5077:5077"
