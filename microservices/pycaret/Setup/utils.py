@@ -8,7 +8,6 @@ from constants import Constants
 import dill
 import os
 import pandas as pd
-from tensorflow import keras
 import traceback
 
 
@@ -167,22 +166,6 @@ class ObjectStorage:
         self.__thread_pool = ThreadPoolExecutor()
         self.__database_connector = database_connector
 
-    def __is_tensorflow_type(self, service_type: str) -> bool:
-        tensorflow_types = [
-            Constants.MODEL_TENSORFLOW_TYPE,
-            Constants.TUNE_TENSORFLOW_TYPE,
-            Constants.TRAIN_TENSORFLOW_TYPE,
-            Constants.TRANSFORM_TENSORFLOW_TYPE,
-            Constants.DATASET_TENSORFLOW_TYPE,
-            Constants.PREDICT_TENSORFLOW_TYPE,
-            Constants.EVALUATE_TENSORFLOW_TYPE,
-        ]
-
-        if service_type in tensorflow_types:
-            return True
-        else:
-            return False
-
     def read(self, filename: str, service_type: str) -> object:
         binary_path = ObjectStorage.get_read_binary_path(
             filename, service_type)
@@ -200,14 +183,13 @@ class ObjectStorage:
             filename)
         if not os.path.exists(os.path.dirname(model_output_path)):
             os.makedirs(os.path.dirname(model_output_path))
-
-        if self.__is_tensorflow_type(service_type):
-            instance.save(model_output_path)
-        else:
-            model_output = open(model_output_path,
+        
+        model_output = open(model_output_path,
                                 self.__WRITE_OBJECT_OPTION)
-            dill.dump(instance, model_output)
-            model_output.close()
+        dill.dump(instance, model_output)
+        model_output.close()
+        
+            
 
     def delete(self, filename: str) -> None:
         self.__thread_pool.submit(self.__database_connector.delete_file,
