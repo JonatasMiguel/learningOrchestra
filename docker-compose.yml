@@ -289,7 +289,7 @@ services:
 
   codexecutor:
     build: microservices/code_executor_image
-    image: learningorchestra/code_executor
+    image: jonatasmiguel/codeexecutorautokeras:latest
     ports:
       - "5009:5009"
     depends_on:

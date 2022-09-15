@@ -185,11 +185,15 @@ class Execution:
 
     def __execute_a_object_method(self, class_instance: object, method: str,
                                   parameters: dict) -> object:
-        logging.info('Start getattr')                            
+        logging.info('Start getattr')
+        logging.info(f'=====> class_instance: {class_instance} ')          
+        logging.info(f'=====> method: {method} ')                    
         class_method = getattr(class_instance, method)
         logging.info('Start self.__parameters_handler.treat(parameters)') 
         treated_parameters = self.__parameters_handler.treat(parameters)
-        logging.info('Start class_method(**treated_parameters)') 
+        logging.info('Start class_method(**treated_parameters)')
+        logging.info(f'=====> treated_parameters: {treated_parameters} ') 
+        logging.info(f'=====> class_method: {class_method} ')  
         method_result = class_method(**treated_parameters)
 
         if self.executor_service_type == Constants.TRAIN_TENSORFLOW_TYPE or \
