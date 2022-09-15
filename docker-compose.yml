@@ -271,7 +271,7 @@ services:
 
   pycaret:
     build: microservices/pycaret/setup
-    image: jonatasmiguel/modelsautokeras:latest
+    image: jonatasmiguel/pycaretsetuplo:latest
     ports:
       - "5007:5007"
     depends_on:
