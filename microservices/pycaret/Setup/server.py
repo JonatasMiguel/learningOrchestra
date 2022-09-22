@@ -58,4 +58,10 @@ def setup() -> jsonify:
                     f'{Constants.MICROSERVICE_URI_GET}{model_name}'
                     f'{Constants.MICROSERVICE_URI_GET_PARAMS}'}),
             Constants.HTTP_STATUS_CODE_SUCCESS_CREATED,
-    )        
+    )  
+
+if __name__ == "__main__":
+    app.run(
+        host=os.environ[Constants.DEFAULT_MODEL_HOST_IP],
+        port=int(os.environ[Constants.DEFAULT_MODEL_HOST_PORT])
+    )
