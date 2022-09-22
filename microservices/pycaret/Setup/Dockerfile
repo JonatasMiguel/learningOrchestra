@@ -1,9 +1,12 @@
-FROM pycaret/full:latest
+FROM python:3.7-slim
 
 WORKDIR /usr/src/model
 COPY . /usr/src/model
-RUN python3 -m pip install --upgrade pip \
-    && pip install -r requirements.txt
+
+RUN apt-get update && apt-get install -y libgomp1
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+RUN pip install -r requirements.txt
 
 ENV DEFAULT_MODEL_HOST_IP "0.0.0.0"
 ENV DEFAULT_MODEL_HOST_PORT 5005
