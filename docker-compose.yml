@@ -326,6 +326,26 @@ services:
       - database
     environment: *default-service-database-env
 
+  setupautokeras:
+    build: microservices/setup_autokeras
+    image: jonatasmiguel/setupautokeras:latest
+    ports:
+      - "5020:5020"
+    depends_on:
+      - databaseprimary
+      - images
+    deploy: *default-deploy-manager
+    volumes:
+      - "code_executor:/code_executions"
+      - "database_executor:/explore"
+      - "database_executor:/transform"
+      - "model:/models"
+      - "binary_executor:/binaries"
+      - "database_api:/datasets"
+    networks:
+      - database
+    environment: *default-service-database-env
+
 networks:
   database:
   spark:
