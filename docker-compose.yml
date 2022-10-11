@@ -148,7 +148,6 @@ services:
     deploy: *default-deploy-manager
     networks:
       - database
-      - spark
 
   model:
     build: microservices/model_image
