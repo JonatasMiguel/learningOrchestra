@@ -1,12 +1,16 @@
-FROM haifengjin/autokeras:latest
+FROM python:3.7-slim
 
 WORKDIR /usr/src/code_executor
 COPY . /usr/src/code_executor
-RUN python3 -m pip install --upgrade pip \
-    && pip install -r requirements.txt
+
+
+RUN apt-get update && apt-get install -y libgomp1
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+RUN pip install -r requirements.txt
 
 ENV MICROSERVICE_IP "0.0.0.0"
-ENV MICROSERVICE_PORT 5020
+ENV MICROSERVICE_PORT 5009
 ENV EXPLORE_VOLUME_PATH "/explore"
 ENV TRANSFORM_VOLUME_PATH "/transform"
 ENV BINARY_VOLUME_PATH "/binaries"

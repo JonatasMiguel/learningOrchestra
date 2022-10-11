@@ -1,4 +1,7 @@
 class Constants:
+    FILE_NAME = "filename"
+    PLOT = "plot"
+    MODEL = "model"
     FINISHED_FIELD_NAME = "finished"
     NAME_FIELD_NAME = "name"
     DESCRIPTION_FIELD_NAME = "description"
@@ -41,34 +44,27 @@ class Constants:
 
     MODEL_SCIKITLEARN_TYPE = "model/scikitlearn"
     MODEL_TENSORFLOW_TYPE = "model/tensorflow"
-    MODEL_AUTOKERAS_TYPE = "model/autokeras"
 
     TUNE_SCIKITLEARN_TYPE = "tune/scikitlearn"
     TUNE_TENSORFLOW_TYPE = "tune/tensorflow"
-    TUNE_AUTOKERAS_TYPE = "tune/autokeras"
 
     TRAIN_SCIKITLEARN_TYPE = "train/scikitlearn"
     TRAIN_TENSORFLOW_TYPE = "train/tensorflow"
-    TRAIN_AUTOKERAS_TYPE = "train/autokeras"
 
     EVALUATE_SCIKITLEARN_TYPE = "evaluate/scikitlearn"
     EVALUATE_TENSORFLOW_TYPE = "evaluate/tensorflow"
-    EVALUATE_AUTOKERAS_TYPE = "evaluate/autokeras"
 
     PREDICT_SCIKITLEARN_TYPE = "predict/scikitlearn"
     PREDICT_TENSORFLOW_TYPE = "predict/tensorflow"
-    PREDICT_AUTOKERAS_TYPE = "predict/autokeras"
 
     PYTHON_FUNCTION_TYPE = "function/python"
     DATASET_GENERIC_TYPE = "dataset/generic"
 
     TRANSFORM_SCIKITLEARN_TYPE = "transform/scikitlearn"
     TRANSFORM_TENSORFLOW_TYPE = "transform/tensorflow"
-    TRANSFORM_AUTOKERAS_TYPE = "transform/autokeras"
 
     EXPLORE_SCIKITLEARN_TYPE = "explore/scikitlearn"
     EXPLORE_TENSORFLOW_TYPE = "explore/tensorflow"
-    EXPLORE_AUTOKERAS_TYPE = "explore/autokeras"
 
     API_PATH = "/api/learningOrchestra/v1/"
 
@@ -78,6 +74,10 @@ class Constants:
 
     MICROSERVICE_URI_PATH = "/codeExecutor"
     MICROSERVICE_URI_GET_PARAMS = "?query={}&limit=20&skip=0"
+
+    PLOT_URI_PATH = "/plotPycaret"
+
+    GET_LOCAL_DATA_URI_PATH = "/GetLocalDataPycaret"
 
     FIRST_ARGUMENT = 0
     SECOND_ARGUMENT = 1

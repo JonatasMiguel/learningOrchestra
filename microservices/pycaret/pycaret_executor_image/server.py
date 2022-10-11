@@ -1,10 +1,11 @@
-from flask import jsonify, request, Flask
+from flask import jsonify, request, Flask, send_from_directory, send_file
 import os
 from code_execution import Parameters, Function, Execution
 from utils import Data, Database, UserRequest, Metadata, ObjectStorage
 from typing import Union
 from constants import Constants
-
+from pycaret_utils import PlotterClassification, GetDataLocal
+import json
 
 app = Flask(__name__)
 
@@ -22,6 +23,57 @@ parameters_handler = Parameters(database, data)
 function_treat = Function()
 
 
+@app.route(f'{Constants.GET_LOCAL_DATA_URI_PATH}', methods=["GET"])
+def get_file():
+    try:
+        with open('resultados.txt', 'a') as f:
+            f.write('PLOT: CHEGOU REQ--------------------------------------------\n')
+            f.write(f'{json.dumps(request.json, indent=2)}\n')
+
+        filename = request.json[Constants.FILE_NAME]
+
+        path = GetDataLocal.get_path_volume(filename)
+        with open('resultados.txt', 'a') as f:
+            f.write(f' caminho do recurso {path}\n')
+
+        with open('resultados.txt', 'a') as f:
+            f.write(f'PLOT: ENVIANDO PNG REQ--------------------------------------------{path}\n')
+    except Exception as error:
+        with open('resultados.txt', 'a') as f:
+            f.write(f'pau 0{error.__cause__}\n')
+            f.write(f'pau 0{repr(error)}\n')
+            f.write(f'pau 0{str(error)}\n')
+
+    return send_file(path, as_attachment=True)
+
+
+@app.route(f'{Constants.PLOT_URI_PATH}', methods=["GET"])
+def get_plot():
+    try:
+        with open('resultados.txt', 'a') as f:
+            f.write('PLOT: CHEGOU REQ--------------------------------------------\n')
+            f.write(f'{json.dumps(request.json, indent=2)}\n')
+
+        filename = request.json[Constants.FILE_NAME]
+        plot = request.json[Constants.PLOT]
+        model = request.json[Constants.MODEL]
+
+        plotter = PlotterClassification(filename, plot, model)
+        plotter.create_plot()
+        plotter.rename_file()
+        path = plotter.get_path_plot()
+
+        with open('resultados.txt', 'a') as f:
+            f.write('PLOT: ENVIANDO PNG REQ--------------------------------------------\n')
+    except Exception as error:
+        with open('resultados.txt', 'a') as f:
+            f.write(f'pau 0{error.__cause__}\n')
+            f.write(f'pau 0{repr(error)}\n')
+            f.write(f'pau 0{str(error)}\n')
+
+    return send_file(path, as_attachment=True)
+
+
 @app.route(Constants.MICROSERVICE_URI_PATH, methods=["POST"])
 def create_execution() -> jsonify:
     filename = request.json[Constants.NAME_FIELD_NAME]
@@ -34,8 +86,12 @@ def create_execution() -> jsonify:
         request_validator,
         filename
     )
+    with open('resultados.txt', 'a') as f:
+        f.write('CRIANDO EXECUCAO--------------------------------------------\n')
 
     if request_errors is not None:
+        with open('resultados.txt', 'a') as f:
+            f.write(f'ERRO NA REQUEST {request_errors}\n')
         return request_errors
 
     execution = Execution(
@@ -46,7 +102,8 @@ def create_execution() -> jsonify:
         metadata_creator,
         parameters_handler,
         function_treat)
-
+    with open('resultados.txt', 'a') as f:
+        f.write('CRIANDO EXECUCAO--------------------------------------------\n')
     execution.create(function, function_parameters, description)
 
     return (
@@ -148,6 +205,7 @@ def analyse_patch_request_errors(request_validator: UserRequest,
 
 
 if __name__ == "__main__":
+    open('resultados.txt', 'w')
     app.run(
         host=os.environ["MICROSERVICE_IP"],
         port=int(os.environ["MICROSERVICE_PORT"])

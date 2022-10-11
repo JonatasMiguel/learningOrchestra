@@ -168,25 +168,6 @@ services:
       - "model:/models"
       - "binary_executor:/binaries"
 
-  pycaret:
-    build: microservices/pycaret/Setup
-    image: jonatasmiguel/pycaretsetuplo:latest
-    ports:
-      - "5005:5005"
-    depends_on:
-      - databaseprimary
-      - images
-    deploy: *default-deploy-manager
-    networks:
-      - database
-    environment: *default-service-database-env
-    volumes:
-      - "code_executor:/code_executions"
-      - "database_executor:/explore"
-      - "database_executor:/transform"
-      - "model:/models"
-      - "binary_executor:/binaries"      
-
   binaryexecutor:
     build: microservices/binary_executor_image
     image: jonatasmiguel/learningorchestraautokerastrain:latest
@@ -225,11 +206,11 @@ services:
       - database
     environment: *default-service-database-env
 
-  setupautokeras:
-    build: microservices/setup_autokeras
-    image: jonatasmiguel/setupautokeras:latest
+  pycaretexecutor:
+    build: microservices/pycaret/pycaret_executor_image
+    image: jonatasmiguel/pycaretexecutor:latest
     ports:
-      - "5020:5020"
+      - "5010:5010"
     depends_on:
       - databaseprimary
       - images

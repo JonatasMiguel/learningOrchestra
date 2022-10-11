@@ -6,6 +6,8 @@ import sys
 import validators
 import requests
 import traceback
+from pycaret import *
+
 
 
 class Function:
@@ -128,8 +130,13 @@ class Execution:
                function: str,
                function_parameters: dict,
                description: str) -> None:
+        with open('resultados.txt','a') as f:
+            f.write('CRIOU OBJETO EXECUCAO\n')
+        
         self.__metadata_creator.create_file(self.filename, self.service_type)
-
+        with open('resultados.txt','a') as f:
+            f.write('CSUBMETENDO PIPELINE\n')
+        
         self.__thread_pool.submit(self.__pipeline,
                                   function,
                                   function_parameters,
@@ -150,6 +157,9 @@ class Execution:
                    function: str,
                    function_parameters: dict,
                    description: str) -> None:
+          
+        with open('resultados.txt','a') as f:
+            f.write('EXECUTANDO FUNCAO\n')        
         function_result, function_message, function_error = \
             self.__execute_function(
                 function,
@@ -172,7 +182,9 @@ class Execution:
         # defined inside of executed function, the second item is the the output
         # caught in executed function and the last item is the the exception
         # message, in case of a threw exception in executed function.
-
+        
+        with open('resultados.txt','a') as f:
+            f.write('TENTANDO EXUCUTAR PROPRIAMENTE\n')
         function_parameters = self.__parameters_handler.treat(parameters)
         function_code = self.__function_handler.treat(function)
 
@@ -182,13 +194,25 @@ class Execution:
         context_variables = {}
 
         try:
+            
+            with open('resultados.txt','a') as f:
+                f.write('1 PASSO ANTES DE EXECUTAR\n')
             exec(function_code, function_parameters, context_variables)
+            
+            with open('resultados.txt','a') as f:
+                f.write('DEPOIS DE EXECUTAR\n')
             function_message = redirected_output.getvalue()
             sys.stdout = old_stdout
-
+            
+            with open('resultados.txt','a') as f:
+                f.write('RETORNANDO RESULTADOS\n')
             return context_variables["response"], function_message, None
 
         except Exception as error:
+            with open('resultados.txt','a') as f:
+                f.write(f'pau 1{error.__cause__}\n')
+                f.write(f'pau 1{repr(error)}\n')
+                f.write(f'pau 1{str(error)}\n')
             traceback.print_exc()
             function_message = redirected_output.getvalue()
             sys.stdout = old_stdout
