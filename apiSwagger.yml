@@ -1,1896 +1,2099 @@
+---
 openapi: 3.0.0
-servers:
-  # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/JONATASMIGUEL_1/AutoMlTools/1.0.0
 info:
-  version: "1.0.0"
   title: learningOrchestra-automltools
   description: The API for the EatBacon IOT project
-
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/JONATASMIGUEL_1/AutoMlTools/1.0.0
+  description: SwaggerHub API Auto Mocking
 paths:
-  /api/learningOrchestra/v1/setup/pycaret/:
+  /api/learningOrchestra/v1/builder/pycaret/:
     post:
       tags:
-      - setup/pycaret
-      description: Returns all pycaret's setup created 
+      - builder/pycaret
+      description: Create a experiment with pycaret tool
       parameters:
-        - name: modelName
-          in: query
-          description: Nome da configuração do experimento com pycaret
-          schema:
-            type: string
-        - name: description
-          in: query
-          description: descrição
-          schema:
-            type: string
-        - name: modulePath 
-          in: query
-          description: caminho do metodo
-          schema:
-            type: string
-        - name : class 
-          in: query
-          description: nome do metodo a ser chamado
-          schema:
-            type: string   
-        - name: classParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: modelName
+        in: query
+        description: experiment name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: descrição
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modulePath
+        in: query
+        description: method path
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: class
+        in: query
+        description: method name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: classParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name" 
-
-  /api/learningOrchestra/v1/setup/pycaret/{modelName}:
+                $ref: '#/components/schemas/inline_response_409'
+  /api/learningOrchestra/v1/builder/pycaret/{modelName}:
     get:
       tags:
-        - setup/pycaret
-      description: Returns all pycaret's setup created 
+      - builder/pycaret
+      description: Returns all pycaret's experiments created
       parameters:
-        - name: modelName
-          in: path
-          required: true
-          description: Nome da configuração do experimento com pycaret
-          schema:
-            type: string
+      - name: modelName
+        in: path
+        description: experiment name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: An array of models metadata in result field
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-
+                $ref: '#/components/schemas/inline_response_200'
     delete:
       tags:
-        - setup/pycaret
-      description: Returns all pycaret's setup created 
+      - builder/pycaret
+      description: Delete pycaret's experiment
       parameters:
-        - name: modelName
-          in: path
-          required: true
-          description: Nome da configuração do experimento com pycaret
-          schema:
-            type: string
+      - name: modelName
+        in: path
+        description: Experiment name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "deleted file"
-                    
-        '404':
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "parent name doesn't exist"  
-
+                $ref: '#/components/schemas/inline_response_404'
     patch:
       tags:
-        - setup/pycaret
-      description: Returns all pycaret's setup created 
+      - builder/pycaret
+      description: Update and re-run pycaret's experiment
       parameters:
-        - name: modelName
-          in: path
-          required: true
-          description: Nome da configuração do experimento com pycaret
-          schema:
-            type: string
-        - name: description
-          in: query
-          description: descrição
-          schema:
-            type: string
-        - name: modulePath 
-          in: query
-          description: caminho do metodo
-          schema:
-            type: string
-        - name : class 
-          in: query
-          description: nome do metodo a ser chamado
-          schema:
-            type: string   
-        - name: classParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: modelName
+        in: path
+        description: experiment name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: descrição
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modulePath
+        in: query
+        description: method path
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: class
+        in: query
+        description: method name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: classParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name" 
-                  
-  /api/learningOrchestra/v1/setup/autokeras/:
+                $ref: '#/components/schemas/inline_response_409'
+  /api/learningOrchestra/v1/builder/autokeras/:
     post:
       tags:
-      - setup/autokeras
-      description: Returns all autokeras's setup created 
+      - builder/autokeras
+      description: Create a experiment with autokeras tool
       parameters:
-        - name: modelName
-          in: query
-          description: Nome da configuração do experimento com autokeras
-          schema:
-            type: string
-        - name: description
-          in: query
-          description: descrição
-          schema:
-            type: string
-        - name: modulePath 
-          in: query
-          description: caminho do metodo
-          schema:
-            type: string
-        - name : class 
-          in: query
-          description: nome do metodo a ser chamado
-          schema:
-            type: string   
-        - name: classParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: modelName
+        in: query
+        description: experiment name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: descrição
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modulePath
+        in: query
+        description: method path
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: class
+        in: query
+        description: method name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: classParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name" 
-
-  /api/learningOrchestra/v1/setup/autokeras/{modelName}:
+                $ref: '#/components/schemas/inline_response_409'
+  /api/learningOrchestra/v1/builder/autokeras/{modelName}:
     get:
       tags:
-        - setup/autokeras
-      description: Returns all autokeras's setup created 
+      - builder/autokeras
+      description: Returns all autokeras's setup created
       parameters:
-        - name: modelName
-          in: path
-          required: true
-          description: Nome da configuração do experimento com autokeras
-          schema:
-            type: string
+      - name: modelName
+        in: path
+        description: experiment name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: An array of models metadata in result field
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-
+                $ref: '#/components/schemas/inline_response_200'
     delete:
       tags:
-        - setup/autokeras
-      description: Returns all autokeras's setup created 
+      - builder/autokeras
+      description: Delete a autokeras experiment
       parameters:
-        - name: modelName
-          in: path
-          required: true
-          description: Nome da configuração do experimento com autokeras
-          schema:
-            type: string
+      - name: modelName
+        in: path
+        description: experiment name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "deleted file"
-                    
-        '404':
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "parent name doesn't exist"  
-
+                $ref: '#/components/schemas/inline_response_404'
     patch:
       tags:
-        - setup/autokeras
-      description: Returns all autokeras's setup created 
+      - builder/autokeras
+      description: Update and re-run experiment
       parameters:
-        - name: modelName
-          in: path
-          required: true
-          description: Nome da configuração do experimento com autokeras
-          schema:
-            type: string
-        - name: description
-          in: query
-          description: descrição
-          schema:
-            type: string
-        - name: modulePath 
-          in: query
-          description: caminho do metodo
-          schema:
-            type: string
-        - name : class 
-          in: query
-          description: nome do metodo a ser chamado
-          schema:
-            type: string   
-        - name: classParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: modelName
+        in: path
+        description: experiment name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: descrição
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modulePath
+        in: query
+        description: method path
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: class
+        in: query
+        description: method name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: classParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name" 
-                  
-###############################################################################################################################################                  
+                $ref: '#/components/schemas/inline_response_409'
+  /api/learningOrchestra/v1/tune/pycaret/:
+    post:
+      tags:
+      - tune/pycaret
+      description: Create a tuning step with pycaret
+      parameters:
+      - name: parentName
+        in: query
+        description: experiment name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: method name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
+      responses:
+        "200":
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+  /api/learningOrchestra/v1/tune/pycaret/{name}:
+    get:
+      tags:
+      - tune/pycaret
+      description: Returns all pycaret's tune created
+      parameters:
+      - name: name
+        in: path
+        description: model name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+    delete:
+      tags:
+      - tune/pycaret
+      description: Delete a tune model created
+      parameters:
+      - name: name
+        in: path
+        description: model name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+    patch:
+      tags:
+      - tune/pycaret
+      description: Update and re-run a tuning step whit pycaret
+      parameters:
+      - name: parentName
+        in: query
+        description: Parent Name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: Model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
+      responses:
+        "200":
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/train/pycaret/:
     post:
       tags:
       - train/pycaret
-      description: Returns all pycaret's setup created 
+      description: Create a training step with pycaret
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com pycaret
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo a ser gerado
-          schema:
-            type: string
-        - name: name 
-          in: query
-          description: nome do arquivo a ser gerado
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: fit
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: Parent Name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: Model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: fit
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name" 
-
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/train/pycaret/{name}:
     get:
       tags:
-        - train/pycaret
-      description: Returns all pycaret's setup created 
+      - train/pycaret
+      description: Returns all pycaret's training steps
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome do modelo treinado
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: model name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: An array of models metadata in result field
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-
+                $ref: '#/components/schemas/inline_response_200'
     delete:
       tags:
-        - train/pycaret
-      description: Returns all pycaret's setup created 
+      - train/pycaret
+      description: Delete a training step with pycaret
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome do modelo treinado
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: model name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "deleted file"
-                    
-        '404':
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "parent name doesn't exist"  
-
+                $ref: '#/components/schemas/inline_response_404'
     patch:
       tags:
-        - train/pycaret
-      description: Returns all pycaret's setup created 
+      - train/pycaret
+      description: Update and re-run a training step with pycaret
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com pycaret
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo a ser gerado
-          schema:
-            type: string
-        - name: name 
-          in: path
-          required: true
-          description: nome do arquivo a ser gerado
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: some description
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: Parent Name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: Model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name"      
-                  
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/train/autokeras/:
     post:
       tags:
       - train/autokeras
-      description: Returns all autokeras's setup created 
+      description: Create a training step with autokeras
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com autokeras
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo a ser gerado
-          schema:
-            type: string
-        - name: name 
-          in: query
-          description: nome do arquivo a ser gerado
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: fit
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: experiment name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: Model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: fit
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name" 
-
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/train/autokeras/{name}:
     get:
       tags:
-        - train/autokeras
-      description: Returns all autokeras's setup created 
+      - train/autokeras
+      description: Returns all training autokeras
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome do modelo treinado
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: model name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: An array of models metadata in result field
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-
+                $ref: '#/components/schemas/inline_response_200'
     delete:
       tags:
-        - train/autokeras
-      description: Returns all autokeras's setup created 
+      - train/autokeras
+      description: Delete a training step with autokeras
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome do modelo treinado
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: model name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "deleted file"
-                    
-        '404':
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "parent name doesn't exist"  
-
+                $ref: '#/components/schemas/inline_response_404'
     patch:
       tags:
-        - train/autokeras
-      description: Returns all autokeras's setup created 
+      - train/autokeras
+      description: Update and re-run training step with autokeras
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com autokeras
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo a ser gerado
-          schema:
-            type: string
-        - name: name 
-          in: path
-          required: true
-          description: nome do arquivo a ser gerado
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: some description
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: experiment name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: Model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name"                      
-#################################################################################################################################################
-
+                $ref: '#/components/schemas/inline_response_409'
+  /api/learningOrchestra/v1/model/autokeras/:
+    post:
+      tags:
+      - model/autokeras
+      description: Returns all autokeras's setup created
+      parameters:
+      - name: modelName
+        in: query
+        description: Model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modulePath
+        in: query
+        description: method path
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: class
+        in: query
+        description: description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: classParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
+      responses:
+        "200":
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+  /api/learningOrchestra/v1/model/autokeras/{modelName}:
+    get:
+      tags:
+      - model/autokeras
+      description: Returns all autokeras's setup created
+      parameters:
+      - name: modelName
+        in: path
+        description: model name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: An array of models metadata in result field
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+    delete:
+      tags:
+      - model/autokeras
+      description: Returns all autokeras's setup created
+      parameters:
+      - name: modelName
+        in: path
+        description: model name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+    patch:
+      tags:
+      - model/autokeras
+      description: Returns all autokeras's setup created
+      parameters:
+      - name: modelName
+        in: path
+        description: Model name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modulePath
+        in: query
+        description: method path
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: class
+        in: query
+        description: description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: classParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
+      responses:
+        "200":
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
+          description: There are conflicts with request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
+          description: The modelName already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/predict/pycaret/:
     post:
       tags:
       - predict/pycaret
-      description: Returns all pycaret's setup created 
+      description: Create a predict step with pycaret
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com pycaret
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo 
-          schema:
-            type: string
-        - name: name 
-          in: query
-          description: nome do resultado predito
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: some description
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: Parent Name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name" 
-
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/predict/pycaret/{name}:
     get:
       tags:
-        - predict/pycaret
-      description: Returns all pycaret's setup created 
+      - predict/pycaret
+      description: Returns all pycaret's setup created
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome da predição realizada
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: nome da predição realizada
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: An array of models metadata in result field
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-
+                $ref: '#/components/schemas/inline_response_200'
     delete:
       tags:
-        - predict/pycaret
-      description: Returns all pycaret's setup created 
+      - predict/pycaret
+      description: Returns all pycaret's setup created
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome da predição realizada
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: nome da predição realizada
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "deleted file"
-                    
-        '404':
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "parent name doesn't exist"  
-
+                $ref: '#/components/schemas/inline_response_404'
     patch:
       tags:
-        - predict/pycaret
-      description: Returns all pycaret's setup created 
+      - predict/pycaret
+      description: Returns all pycaret's setup created
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com pycaret
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo a ser gerado
-          schema:
-            type: string
-        - name: name
-          in: path
-          required: true
-          description: nome da predição realizada
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: some description
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: Parent Name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: Model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: nome da predição realizada
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name"     
-                  
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/predict/autokeras/:
     post:
       tags:
       - predict/autokeras
-      description: Returns all autokeras's setup created 
+      description: Returns all autokeras's setup created
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com autokeras
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo 
-          schema:
-            type: string
-        - name: name 
-          in: query
-          description: nome do resultado predito
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: some description
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: experiment name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name" 
-
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/predict/autokeras/{name}:
     get:
       tags:
-        - predict/autokeras
-      description: Returns all autokeras's setup created 
+      - predict/autokeras
+      description: Returns all autokeras's setup created
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome da predição realizada
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: nome da predição realizada
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: An array of models metadata in result field
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-
+                $ref: '#/components/schemas/inline_response_200'
     delete:
       tags:
-        - predict/autokeras
-      description: Returns all autokeras's setup created 
+      - predict/autokeras
+      description: Returns all autokeras's setup created
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome da predição realizada
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: nome da predição realizada
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "deleted file"
-                    
-        '404':
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "parent name doesn't exist"  
-
+                $ref: '#/components/schemas/inline_response_404'
     patch:
       tags:
-        - predict/autokeras
-      description: Returns all autokeras's setup created 
+      - predict/autokeras
+      description: Returns all autokeras's setup created
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com autokeras
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo a ser gerado
-          schema:
-            type: string
-        - name: name
-          in: path
-          required: true
-          description: nome da predição realizada
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: some description
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: experiment name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: Model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: nome da predição realizada
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name"                     
-
-#################################################################################################################################################
-
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/explore/pycaret/:
     post:
       tags:
       - explore/pycaret
-      description: Returns all pycaret's setup created 
+      description: Returns all pycaret's setup created
       parameters:
-        - name: inputDatasetName
-          in: query
-          description: name of dataset to use
-          schema:
-            type: string
-        - name: outputDatasetName
-          in: query
-          description: Nome do modelo 
-          schema:
-            type: string
-        - name: names 
-          in: query
-          description: list of fields
-          schema:
-            type: array        
-            items: {}
+      - name: inputDatasetName
+        in: query
+        description: name of dataset to use
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: outputDatasetName
+        in: query
+        description: model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: names
+        in: query
+        description: list of fields
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/explore/histogram?titanicTrainHistogram?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200_2'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "invalid fields"
-        '409':
+                $ref: '#/components/schemas/inline_response_406'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated projection name" 
-
+                $ref: '#/components/schemas/inline_response_409_1'
   /api/learningOrchestra/v1/explore/pycaret/{histogramName}:
     get:
       tags:
-        - explore/pycaret
-      description: Returns all pycaret's setup created 
+      - explore/pycaret
+      description: Returns all pycaret's setup created
       parameters:
-        - name: histogramName
-          in: path
-          required: true
-          description: nome da predição realizada
-          schema:
-            type: string
+      - name: histogramName
+        in: path
+        description: nome da predição realizada
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: An array of models metadata in result field
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-
+                $ref: '#/components/schemas/inline_response_200'
     delete:
       tags:
-        - explore/pycaret
-      description: Returns all pycaret's setup created 
+      - explore/pycaret
+      description: Returns all pycaret's setup created
       parameters:
-        - name: histogramName
-          in: path
-          required: true
-          description: nome da predição realizada
-          schema:
-            type: string
+      - name: histogramName
+        in: path
+        description: nome da predição realizada
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "deleted file"
-                    
-        '404':
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "parent name doesn't exist"  
-                  
+                $ref: '#/components/schemas/inline_response_404'
   /api/learningOrchestra/v1/explore/autokeras/:
     post:
       tags:
       - explore/autokeras
-      description: Returns all autokeras's setup created 
+      description: Returns all autokeras's setup created
       parameters:
-        - name: inputDatasetName
-          in: query
-          description: name of dataset to use
-          schema:
-            type: string
-        - name: outputDatasetName
-          in: query
-          description: Nome do modelo 
-          schema:
-            type: string
-        - name: names 
-          in: query
-          description: list of fields
-          schema:
-            type: array        
-            items: {}
+      - name: inputDatasetName
+        in: query
+        description: name of dataset to use
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: outputDatasetName
+        in: query
+        description: model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: names
+        in: query
+        description: list of fields
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/explore/histogram?titanicTrainHistogram?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200_2'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "invalid fields"
-        '409':
+                $ref: '#/components/schemas/inline_response_406'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated projection name" 
-
+                $ref: '#/components/schemas/inline_response_409_1'
   /api/learningOrchestra/v1/explore/autokeras/{histogramName}:
     get:
       tags:
-        - explore/autokeras
-      description: Returns all autokeras's setup created 
+      - explore/autokeras
+      description: Returns all autokeras's setup created
       parameters:
-        - name: histogramName
-          in: path
-          required: true
-          description: nome da predição realizada
-          schema:
-            type: string
+      - name: histogramName
+        in: path
+        description: nome da predição realizada
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: An array of models metadata in result field
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-
+                $ref: '#/components/schemas/inline_response_200'
     delete:
       tags:
-        - explore/autokeras
-      description: Returns all autokeras's setup created 
+      - explore/autokeras
+      description: Returns all autokeras's setup created
       parameters:
-        - name: histogramName
-          in: path
-          required: true
-          description: nome da predição realizada
-          schema:
-            type: string
+      - name: histogramName
+        in: path
+        description: nome da predição realizada
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "deleted file"
-                    
-        '404':
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "parent name doesn't exist"                    
-
-#################################################################################################################################################
+                $ref: '#/components/schemas/inline_response_404'
   /api/learningOrchestra/v1/evaluate/pycaret/:
     post:
       tags:
       - evaluate/pycaret
-      description: Returns all pycaret's setup created 
+      description: Returns all pycaret's setup created
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com pycaret
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo 
-          schema:
-            type: string
-        - name: name 
-          in: query
-          description: nome do resultado predito
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: evaluate_model
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: Parent Name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: evaluate_model
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name" 
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/evaluate/pycaret/{name}:
     get:
       tags:
-        - evaluate/pycaret
-      description: Returns all pycaret's setup created 
+      - evaluate/pycaret
+      description: Returns all pycaret's setup created
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome da avaliação
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: An array of models metadata in result field
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                $ref: '#/components/schemas/inline_response_200'
     delete:
       tags:
-        - evaluate/pycaret
-      description: Returns all pycaret's setup created 
+      - evaluate/pycaret
+      description: Returns all pycaret's setup created
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome da avaliação
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "deleted file"
-                    
-        '404':
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "parent name doesn't exist"  
+                $ref: '#/components/schemas/inline_response_404'
     patch:
       tags:
-        - evaluate/pycaret
-      description: Returns all pycaret's setup created 
+      - evaluate/pycaret
+      description: Returns all pycaret's setup created
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com pycaret
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo 
-          schema:
-            type: string
-        - name: name
-          in: path
-          required: true
-          description: nome da avaliação
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: evaluate_model
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: Parent Name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: evaluate_model
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name"    
-                  
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/evaluate/autokeras/:
     post:
       tags:
       - evaluate/autokeras
-      description: Returns all autokeras's setup created 
+      description: Returns all autokeras's setup created
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com autokeras
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo 
-          schema:
-            type: string
-        - name: name 
-          in: query
-          description: nome do resultado predito
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: evaluate_model
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: experiment name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: evaluate_model
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name" 
+                $ref: '#/components/schemas/inline_response_409'
   /api/learningOrchestra/v1/evaluate/autokeras/{name}:
     get:
       tags:
-        - evaluate/autokeras
-      description: Returns all autokeras's setup created 
+      - evaluate/autokeras
+      description: Returns all autokeras's evaluate steps created
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome da avaliação
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: An array of models metadata in result field
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
+                $ref: '#/components/schemas/inline_response_200'
     delete:
       tags:
-        - evaluate/autokeras
-      description: Returns all autokeras's setup created 
+      - evaluate/autokeras
+      description: Delete evaluate step
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: nome da avaliação
-          schema:
-            type: string
+      - name: name
+        in: path
+        description: name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "deleted file"
-                    
-        '404':
+                $ref: '#/components/schemas/inline_response_200_1'
+        "404":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "parent name doesn't exist"  
+                $ref: '#/components/schemas/inline_response_404'
     patch:
       tags:
-        - evaluate/autokeras
-      description: Returns all autokeras's setup created 
+      - evaluate/autokeras
+      description: Update and re-run evaluate step with autokeras
       parameters:
-        - name: parentName
-          in: query
-          description: Nome da configuração do experimento com autokeras
-          schema:
-            type: string
-        - name: modelName
-          in: query
-          description: Nome do modelo 
-          schema:
-            type: string
-        - name: name
-          in: path
-          required: true
-          description: nome da avaliação
-          schema:
-            type: string
-        - name : description 
-          in: query
-          description: some description
-          schema:
-            type: string 
-        - name : method 
-          in: query
-          description: evaluate_model
-          schema:
-            type: string    
-        - name: methodParameters 
-          in: query
-          description: parametros do metodo
-          schema:
-            type: array        
-            items: {}
+      - name: parentName
+        in: query
+        description: experiment name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: modelName
+        in: query
+        description: model name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: name
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: some description
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: evaluate_model
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: methodParameters
+        in: query
+        description: method parameters
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items: {}
       responses:
-        '200':
+        "200":
           description: Successfully returned a list of artists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-                    
-        '406':
+                $ref: '#/components/schemas/inline_response_200'
+        "406":
           description: There are conflicts with request data
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "/api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0"
-        '409':
+                $ref: '#/components/schemas/inline_response_200'
+        "409":
           description: The modelName already exists
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  result:
-                    type: string
-                example:  
-                  result: "duplicated model name"                      
-                               
-
+                $ref: '#/components/schemas/inline_response_409'
 components:
   schemas:
     Schema:
@@ -1899,3 +2102,52 @@ components:
         id:
           type: integer
           format: int64
+    inline_response_200:
+      type: object
+      properties:
+        result:
+          type: string
+      example:
+        result: /api/learningOrchestra/v1/model/default?multiTaskLassoInstance?query={}&limit=10&skip=0
+    inline_response_409:
+      type: object
+      properties:
+        result:
+          type: string
+      example:
+        result: duplicated model name
+    inline_response_200_1:
+      type: object
+      properties:
+        result:
+          type: string
+      example:
+        result: deleted file
+    inline_response_404:
+      type: object
+      properties:
+        result:
+          type: string
+      example:
+        result: parent name doesn't exist
+    inline_response_200_2:
+      type: object
+      properties:
+        result:
+          type: string
+      example:
+        result: /api/learningOrchestra/v1/explore/histogram?titanicTrainHistogram?query={}&limit=10&skip=0
+    inline_response_406:
+      type: object
+      properties:
+        result:
+          type: string
+      example:
+        result: invalid fields
+    inline_response_409_1:
+      type: object
+      properties:
+        result:
+          type: string
+      example:
+        result: duplicated projection name
