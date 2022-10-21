@@ -533,16 +533,118 @@
       ]
     },
     {
-      "endpoint": "/api/learningOrchestra/v1/setup/pycaret",
+      "endpoint": "/api/learningOrchestra/v1/builder/pycaret",
       "method": "POST",
       "output_encoding": "no-op",
       "backend": [
         {
           "encoding": "no-op",
           "method": "POST",
-          "url_pattern": "/setuppycaret?type=setup/pycaret",
+          "url_pattern": "/codeExecutor?type=function/python",
           "host": [
-            "http://setuppycaret:5007"
+            "http://pycaretxecutor:5010"
+          ],
+          "extra_config": {}
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/learningOrchestra/v1/builder/pycaret/{filename}",
+      "method": "PATCH",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "method": "PATCH",
+          "url_pattern": "/codeExecutor/{filename}?type=function/python",
+          "host": [
+            "http://pycaretxecutor:5010"
+          ],
+          "extra_config": {}
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/learningOrchestra/v1/builder/pycaret",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "method": "GET",
+          "url_pattern": "/files?type=function/python",
+          "host": [
+            "http://databaseapi:5000"
+          ],
+          "extra_config": {}
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/learningOrchestra/v1/builder/pycaret/{filename}",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "querystring_params": [
+        "skip",
+        "limit",
+        "query"
+      ],
+      "backend": [
+        {
+          "encoding": "no-op",
+          "method": "GET",
+          "url_pattern": "/files/{filename}",
+          "host": [
+            "http://databaseapi:5000"
+          ],
+          "extra_config": {}
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/learningOrchestra/v1/builder/pycaret/{filename}",
+      "method": "DELETE",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "method": "DELETE",
+          "url_pattern": "/codeExecutor/{filename}?type=function/python",
+          "host": [
+            "http://pycaretxecutor:5010"
+          ],
+          "extra_config": {}
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/learningOrchestra/v1/explore/pycaret",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "method": "GET",
+          "url_pattern": "/plotPycaret",
+          "host": [
+            "http://pycaretxecutor:5010"
+          ],
+          "extra_config": {}
+        }
+      ]
+    }
+    ,
+    {
+      "endpoint": "/api/learningOrchestra/v1/explore/getlocaldatapycaret",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "method": "GET",
+          "url_pattern": "/GetLocalDataPycaret",
+          "host": [
+            "http://pycaretxecutor:5010"
           ],
           "extra_config": {}
         }
