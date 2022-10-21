@@ -473,7 +473,7 @@
           "method": "POST",
           "url_pattern": "/codeExecutor?type=function/python",
           "host": [
-            "http://pycaretxecutor:5010"
+            "http://pycaretexecutor:5010"
           ],
           "extra_config": {}
         }
@@ -489,7 +489,7 @@
           "method": "PATCH",
           "url_pattern": "/codeExecutor/{filename}?type=function/python",
           "host": [
-            "http://pycaretxecutor:5010"
+            "http://pycaretexecutor:5010"
           ],
           "extra_config": {}
         }
@@ -542,7 +542,7 @@
           "method": "DELETE",
           "url_pattern": "/codeExecutor/{filename}?type=function/python",
           "host": [
-            "http://pycaretxecutor:5010"
+            "http://pycaretexecutor:5010"
           ],
           "extra_config": {}
         }
@@ -558,7 +558,7 @@
           "method": "GET",
           "url_pattern": "/plotPycaret",
           "host": [
-            "http://pycaretxecutor:5010"
+            "http://pycaretexecutor:5010"
           ],
           "extra_config": {}
         }
@@ -575,7 +575,7 @@
           "method": "GET",
           "url_pattern": "/GetLocalDataPycaret",
           "host": [
-            "http://pycaretxecutor:5010"
+            "http://pycaretexecutor:5010"
           ],
           "extra_config": {}
         }
