@@ -17,6 +17,13 @@ x-deploy-worker: &default-deploy-worker
     constraints:
       - "node.role==worker"
 
+x-nfs-config: &default-nfs
+  driver: local
+  driver_opts:
+    type: nfs
+    o: addr=${NFS_SERVER_IP},rw
+    device: ":/mnt/learningOrchestra"      
+
 x-service-database-env: &default-service-database-env
   - DATABASE_URL=mongodb://root:owl45#21@databaseprimary,databasesecondary
   - DATABASE_PORT=27017
@@ -231,11 +238,18 @@ networks:
   portainer:
 
 volumes:
-  images:
   database:
+  images:
+    *default-nfs
   database_api:
+    *default-nfs
   database_executor:
+    *default-nfs
   code_executor:
+    *default-nfs
   model:
+    *default-nfs
   binary_executor:
+    *default-nfs
   portainer:
+    *default-nfs
