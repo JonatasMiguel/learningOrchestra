@@ -18,11 +18,9 @@ x-deploy-worker: &default-deploy-worker
       - "node.role==worker"
 
 x-nfs-config: &default-nfs
-  driver: local
+  driver: nfs
   driver_opts:
-    type: nfs
-    o: addr=127.0.0.1,rw
-    device: ":/nfs-learningOrchestra"      
+    share: 10.182.0.5:/nfs-learningorchestra      
 
 x-service-database-env: &default-service-database-env
   - DATABASE_URL=mongodb://root:owl45#21@databaseprimary,databasesecondary
