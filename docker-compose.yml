@@ -22,7 +22,7 @@ x-nfs-config: &default-nfs
   driver_opts:
     type: nfs
     o: addr=${NFS_SERVER_IP},rw
-    device: ":/mnt/learningOrchestra"      
+    device: ":/nfs-learningOrchestra"      
 
 x-service-database-env: &default-service-database-env
   - DATABASE_URL=mongodb://root:owl45#21@databaseprimary,databasesecondary
