@@ -21,7 +21,7 @@ x-nfs-config: &default-nfs
   driver: local
   driver_opts:
     type: nfs
-    o: addr=${NFS_SERVER_IP},rw
+    o: addr=127.0.0.1,rw
     device: ":/nfs-learningOrchestra"      
 
 x-service-database-env: &default-service-database-env
