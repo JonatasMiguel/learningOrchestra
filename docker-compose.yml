@@ -244,15 +244,9 @@ networks:
 volumes:
   database:
   images:
-    *nfs-teste 
   database_api:
-    *nfs-teste 
   database_executor:
-    *nfs-teste 
   code_executor:
   model:
-    *nfs-teste 
   binary_executor:
-    *nfs-teste 
   portainer:
-    *nfs-teste 
