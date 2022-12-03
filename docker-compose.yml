@@ -250,7 +250,6 @@ volumes:
   database_executor:
     *nfs-teste 
   code_executor:
-    *nfs-teste 
   model:
     *nfs-teste 
   binary_executor:
