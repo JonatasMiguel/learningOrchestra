@@ -23,11 +23,10 @@ x-deploy-worker: &default-deploy-worker
 #    share: 10.182.0.5:/home/nfslo 
 
 x-nfs-teste: &nfs-teste   
-  nfs:
-    driver_opts:
-      type: "nfs"
-      o: "addr=10.182.0.8,nolock,soft,rw"
-      device: ":/mnt/wp-data"
+  driver_opts:
+    type: "nfs"
+    o: "addr=10.182.0.8,nolock,soft,rw"
+    device: ":/mnt/wp-data"
 
 x-service-database-env: &default-service-database-env
   - DATABASE_URL=mongodb://root:owl45#21@databaseprimary,databasesecondary
