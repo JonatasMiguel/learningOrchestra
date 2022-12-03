@@ -20,7 +20,14 @@ x-deploy-worker: &default-deploy-worker
 x-nfs-config: &default-nfs
   driver: nfs
   driver_opts:
-    share: 10.182.0.5:/nfs-learningorchestra      
+    share: 10.182.0.5:/home/nfslo 
+
+x-nfs-teste: &nfs-teste   
+  nfs:
+    driver_opts:
+      type: nfs
+      o: addr=10.182.0.5,nfsvers=4
+      device: :/volume1/docker_volumes/application
 
 x-service-database-env: &default-service-database-env
   - DATABASE_URL=mongodb://root:owl45#21@databaseprimary,databasesecondary
