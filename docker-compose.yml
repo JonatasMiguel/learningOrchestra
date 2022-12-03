@@ -17,17 +17,17 @@ x-deploy-worker: &default-deploy-worker
     constraints:
       - "node.role==worker"
 
-x-nfs-config: &default-nfs
-  driver: nfs
-  driver_opts:
-    share: 10.182.0.5:/home/nfslo 
+#x-nfs-plugin: &nfs-plugin
+#  driver: nfs
+#  driver_opts:
+#    share: 10.182.0.5:/home/nfslo 
 
 x-nfs-teste: &nfs-teste   
   nfs:
     driver_opts:
-      type: nfs
-      o: addr=10.182.0.5,nfsvers=4
-      device: :/volume1/docker_volumes/application
+      type: "nfs"
+      o: "addr=10.182.0.8,nolock,soft,rw"
+      device: ":/mnt/wp-data"
 
 x-service-database-env: &default-service-database-env
   - DATABASE_URL=mongodb://root:owl45#21@databaseprimary,databasesecondary
@@ -245,16 +245,16 @@ networks:
 volumes:
   database:
   images:
-    *default-nfs
+    *nfs-teste 
   database_api:
-    *default-nfs
+    *nfs-teste 
   database_executor:
-    *default-nfs
+    *nfs-teste 
   code_executor:
-    *default-nfs
+    *nfs-teste 
   model:
-    *default-nfs
+    *nfs-teste 
   binary_executor:
-    *default-nfs
+    *nfs-teste 
   portainer:
-    *default-nfs
+    *nfs-teste 
