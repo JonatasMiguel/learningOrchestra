@@ -25,30 +25,40 @@ function_treat = Function()
 @app.route(Constants.MICROSERVICE_URI_PATH, methods=["POST"])
 def create_execution() -> jsonify:
     filename = request.json[Constants.NAME_FIELD_NAME]
-    description = request.json[Constants.DESCRIPTION_FIELD_NAME]
-    service_type = request.args.get(Constants.TYPE_PARAM_NAME)
-    function_parameters = request.json[Constants.FUNCTION_PARAMETERS_FIELD_NAME]
-    function = request.json[Constants.FUNCTION_FIELD_NAME]
 
-    request_errors = analyse_post_request_errors(
-        request_validator,
-        filename
-    )
+    try:
+        with open('logs.txt','a') as f:
+            f.write('Chegou requisição\n')
 
-    if request_errors is not None:
-        return request_errors
+        description = request.json[Constants.DESCRIPTION_FIELD_NAME]
+        service_type = request.args.get(Constants.TYPE_PARAM_NAME)
+        function_parameters = request.json[Constants.FUNCTION_PARAMETERS_FIELD_NAME]
+        function = request.json[Constants.FUNCTION_FIELD_NAME]
 
-    execution = Execution(
-        database,
-        filename,
-        service_type,
-        storage,
-        metadata_creator,
-        parameters_handler,
-        function_treat)
+        request_errors = analyse_post_request_errors(
+            request_validator,
+            filename
+        )
 
-    execution.create(function, function_parameters, description)
+        if request_errors is not None:
+            return request_errors
 
+        execution = Execution(
+            database,
+            filename,
+            service_type,
+            storage,
+            metadata_creator,
+            parameters_handler,
+            function_treat)
+
+        execution.create(function, function_parameters, description)    
+    except Exception as error:
+        with open('resultados.txt', 'a') as f:
+            f.write(f'erro: {error.__cause__}\n')
+            f.write(f'erro: {repr(error)}\n')
+            f.write(f'erro: {str(error)}\n')
+    
     return (
         jsonify({
             Constants.MESSAGE_RESULT:

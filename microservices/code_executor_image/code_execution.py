@@ -129,7 +129,7 @@ class Execution:
                function_parameters: dict,
                description: str) -> None:
         self.__metadata_creator.create_file(self.filename, self.service_type)
-
+        print("Submetendo a thread")
         self.__thread_pool.submit(self.__pipeline,
                                   function,
                                   function_parameters,
